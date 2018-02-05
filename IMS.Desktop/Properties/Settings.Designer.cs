@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace InventoryManagementSystemDesktopApplication.Properties
+namespace IMS.Desktop.Properties
 {
 
 

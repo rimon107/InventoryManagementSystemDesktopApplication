@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("InventoryManagementSystemDesktopApplication")]
+[assembly: AssemblyTitle("IMS.Desktop")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("InventoryManagementSystemDesktopApplication")]
+[assembly: AssemblyProduct("IMS.Desktop")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("1c51af6b-a5b2-4f58-b91d-80a81826c2a9")]
+[assembly: Guid("1d70420f-28de-4b62-a538-69a2a61b98da")]
 
 // Version information for an assembly consists of the following four values:
 //

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b54b3431ffef4fdeabaccc487707acac" Name="Diagram1">
+        <EntityTypeShape EntityType="InventoryModel.Manufacturer" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.MaterialType" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Received" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.ReceiveDetail" Width="1.5" PointX="5.25" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Supplier" Width="1.5" PointX="0.75" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.TransactionSource" Width="1.5" PointX="0.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Unit" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
+        <AssociationConnector Association="InventoryModel.fk_ManufacturerId" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.fk_MaterialTypeId" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.fk_ReceiveId" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.fk_SupplierId" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.fk_TransactionSourceId" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.fk_UnitId" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
