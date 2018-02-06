@@ -147,5 +147,13 @@ namespace IMS.Desktop.Views
 
             btnDelete.Enabled = false;
         }
+
+        private void txtSupplierName_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtSupplierAddress.Focus();
+            }
+        }
     }
 }

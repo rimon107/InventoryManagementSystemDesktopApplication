@@ -65,6 +65,7 @@
             this.txtSupplierName.Name = "txtSupplierName";
             this.txtSupplierName.Size = new System.Drawing.Size(193, 20);
             this.txtSupplierName.TabIndex = 2;
+            this.txtSupplierName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSupplierName_KeyDown);
             // 
             // txtSupplierAddress
             // 
