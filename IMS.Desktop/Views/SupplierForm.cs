@@ -1,5 +1,7 @@
 ﻿using Common.Library;
 using IMS.Data.DLL.Context;
+using IMS.Data.DLL.IContext;
+using IMS.Data.Model;
 using IMS.Service.BAL;
 using IMS.Service.DLL.IContext;
 using System;
@@ -17,16 +19,17 @@ namespace IMS.Desktop.Views
 {
     public partial class SupplierForm : Form
     {
-        private readonly SupplierContext supplierContext;
+        private readonly SupplierContextGeneric supplierContext;
 
         public SupplierForm()
         {
             InitializeComponent();
 
             var container = new UnityContainer();
-            container.RegisterType<ISupplierContext, DllSupplierContext>();
+            //container.RegisterType<ISupplierContext, DllSupplierContext>();
+            container.RegisterType<IContext<Supplier>, Context<Supplier>>();
 
-            this.supplierContext = container.Resolve<SupplierContext>();
+            this.supplierContext = container.Resolve<SupplierContextGeneric>();
 
             DisplayData();
         }
@@ -95,7 +98,10 @@ namespace IMS.Desktop.Views
             gvSupplier.Columns["SupplierName"].HeaderText = "Supplier Name";
             gvSupplier.Columns["SupplierAddress"].HeaderText = "Supplier Address";
 
-            
+            gvSupplier.Columns["SupplierName"].Width = 100;
+            gvSupplier.Columns["SupplierAddress"].Width = 300;
+
+
 
         }
 
@@ -154,6 +160,11 @@ namespace IMS.Desktop.Views
             {
                 txtSupplierAddress.Focus();
             }
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            Refresh();
         }
     }
 }

@@ -38,13 +38,14 @@
             this.lblError = new System.Windows.Forms.Label();
             this.hdnSupplierId = new System.Windows.Forms.Label();
             this.btnDelete = new System.Windows.Forms.Button();
+            this.btnClear = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gvSupplier)).BeginInit();
             this.SuspendLayout();
             // 
             // lblSupplier
             // 
             this.lblSupplier.AutoSize = true;
-            this.lblSupplier.Location = new System.Drawing.Point(470, 36);
+            this.lblSupplier.Location = new System.Drawing.Point(510, 36);
             this.lblSupplier.Name = "lblSupplier";
             this.lblSupplier.Size = new System.Drawing.Size(71, 13);
             this.lblSupplier.TabIndex = 0;
@@ -138,11 +139,22 @@
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
+            // btnClear
+            // 
+            this.btnClear.Location = new System.Drawing.Point(671, 36);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(75, 35);
+            this.btnClear.TabIndex = 10;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
             // SupplierForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1113, 610);
+            this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.hdnSupplierId);
             this.Controls.Add(this.lblError);
@@ -173,5 +185,6 @@
         private System.Windows.Forms.Label lblError;
         private System.Windows.Forms.Label hdnSupplierId;
         private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button btnClear;
     }
 }

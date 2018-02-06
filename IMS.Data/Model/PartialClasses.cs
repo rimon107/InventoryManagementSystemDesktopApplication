@@ -9,7 +9,7 @@ namespace IMS.Data.Model
     }
 
     [MetadataType(typeof(SupplierMetadata))]
-    public partial class Supplier
+    public partial class Supplier : BaseEntity
     {
 
     }
