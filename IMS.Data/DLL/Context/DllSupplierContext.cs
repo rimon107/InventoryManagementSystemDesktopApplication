@@ -8,12 +8,12 @@ using System.Linq;
 
 namespace IMS.Data.DLL.Context
 {
-    public class SupplierContext : IDisposable, ISupplierContext
+    public class DllSupplierContext : IDisposable, ISupplierContext
     {
         private readonly InventoryEntities context;
         private bool disposed;
 
-        public SupplierContext()
+        public DllSupplierContext()
         {
             context = new InventoryEntities();
         }
@@ -22,6 +22,8 @@ namespace IMS.Data.DLL.Context
         {
             try
             {
+                //var error = context.Entry(supplier).GetValidationResult();
+
                 context.Suppliers.Add(supplier);
                 context.SaveChanges();
 
@@ -33,7 +35,7 @@ namespace IMS.Data.DLL.Context
             }
         }
 
-        public bool EditSupplier(Supplier supplier)
+        public bool UpdateSupplier(Supplier supplier)
         {
             try
             {
@@ -71,7 +73,7 @@ namespace IMS.Data.DLL.Context
                
         }
 
-        public ICollection<Supplier> GetAllSupplier(int SupplierId)
+        public ICollection<Supplier> GetAllSupplier()
         {
             return context.Suppliers.ToList();
         }

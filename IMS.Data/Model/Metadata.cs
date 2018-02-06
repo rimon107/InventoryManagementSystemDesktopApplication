@@ -86,13 +86,13 @@ namespace IMS.Data.Model
     {
 
         [StringLength(50)]
-        [Required]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Suplier Name Required")]
         [Display(Name = "Suplier Name")]
-        public string SuplierName { get; set; }
+        public string SupplierName { get; set; }
 
         [StringLength(50)]
-        [Required]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Suplier Address Required")]
         [Display(Name = "Suplier Address")]
-        public string SuplierAddress { get; set; }
+        public string SupplierAddress { get; set; }
     }
 }

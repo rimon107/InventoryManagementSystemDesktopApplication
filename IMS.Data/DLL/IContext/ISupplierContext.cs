@@ -7,8 +7,8 @@ namespace IMS.Service.DLL.IContext
     {
         bool CreateSupplier(Supplier supplier);
         bool DeleteSupplier(Supplier supplier);
-        bool EditSupplier(Supplier supplier);
-        ICollection<Supplier> GetAllSupplier(int SupplierId);
+        bool UpdateSupplier(Supplier supplier);
+        ICollection<Supplier> GetAllSupplier();
         Supplier GetSupplierById(int SupplierId);
     }
 }

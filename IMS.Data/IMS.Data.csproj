@@ -50,7 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DLL\IContext\ISupplierContext.cs" />
-    <Compile Include="DLL\Context\SupplierContext.cs" />
+    <Compile Include="DLL\Context\DllSupplierContext.cs" />
     <Compile Include="Model\Entity.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

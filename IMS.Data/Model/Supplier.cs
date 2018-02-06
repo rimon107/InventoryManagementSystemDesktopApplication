@@ -21,8 +21,8 @@ namespace IMS.Data.Model
         }
     
         public int Id { get; set; }
-        public string SuplierName { get; set; }
-        public string SuplierAddress { get; set; }
+        public string SupplierName { get; set; }
+        public string SupplierAddress { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Received> Receiveds { get; set; }
