@@ -34,21 +34,22 @@ namespace IMS.Service.BAL
 
         public bool CreateSupplier(string SupplierName, string SupplierAddress)
         {
-            Supplier supplier = new Supplier();
-            supplier.SupplierName = SupplierName;
-            supplier.SupplierAddress = SupplierAddress;
+            //Supplier supplier = new Supplier();
+            //supplier.SupplierName = SupplierName;
+            //supplier.SupplierAddress = SupplierAddress;
 
-            if (ModelState.IsValid<Supplier>(supplier))
-            {
-                var sup =  context.Create(supplier);
+            //if (ModelState.IsValid<Supplier>(supplier))
+            //{
+            //    var sup =  context.Create(supplier);
 
-                return true;
-            }
-            else
-            {
+            //    return true;
+            //}
+            //else
+            //{
 
-                return false;
-            }
+            //    return false;
+            //}
+            throw new NotImplementedException();
 
 
 
@@ -56,20 +57,22 @@ namespace IMS.Service.BAL
 
         public bool UpdateSupplier(int SupplierId, string SupplierName, string SupplierAddress)
         {
-            Supplier supplier = context.GetEntityById(SupplierId);
+            //Supplier supplier = context.GetEntityById(SupplierId);
 
-            supplier.SupplierName = SupplierName;
-            supplier.SupplierAddress = SupplierAddress;
+            //supplier.SupplierName = SupplierName;
+            //supplier.SupplierAddress = SupplierAddress;
 
-            if (ModelState.IsValid<Supplier>(supplier))
-            {
-                var supp = context.Update(supplier);
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            //if (ModelState.IsValid<Supplier>(supplier))
+            //{
+            //    var supp = context.Update(supplier);
+            //    return true;
+            //}
+            //else
+            //{
+            //    return false;
+            //}
+
+            throw new NotImplementedException();
 
 
 
@@ -77,19 +80,21 @@ namespace IMS.Service.BAL
 
         public bool DeleteSupplier(int SupplierId)
         {
-            Supplier supplier = context.GetEntityById(SupplierId);
+            //Supplier supplier = context.GetEntityById(SupplierId);
 
-            if (supplier != null && supplier.Id != 0)
-            {
-                var supp = context.Delete(supplier);
+            //if (supplier != null && supplier.Id != 0)
+            //{
 
-                return true;
 
-            }
-            else
-            {
-                return false;
-            }
+            //    return context.Delete(supplier);
+
+            //}
+            //else
+            //{
+            //    return false;
+            //}
+
+            throw new NotImplementedException();
 
 
 
@@ -97,7 +102,8 @@ namespace IMS.Service.BAL
 
         public ICollection<Supplier> GetAllSupplier()
         {
-            return context.GetAllEntity();
+            //return context.GetAllEntity();
+            throw new NotImplementedException();
         }
 
     }

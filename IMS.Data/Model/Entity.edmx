@@ -5,114 +5,188 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="InventoryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Manufacturer">
+        <EntityType Name="Material">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="MaterialCode" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ManufacturerName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MaterialCode" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="MaterialName" Type="varchar" MaxLength="100" />
+          <Property Name="SubCategoryId" Type="int" Nullable="false" />
+          <Property Name="Unit" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="MaxStockQty" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ReOrderLevel" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="HSCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LeadTimeID" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="BusiCode" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="SubBusiCode" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="IsActive" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="EditBy" Type="varchar" MaxLength="20" />
+          <Property Name="EditeDate" Type="datetime" />
+          <Property Name="PlantCode" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="PartNo" Type="varchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="MaterialType">
+        <EntityType Name="MaterialCategory">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TypeName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="CategoryName" Type="varchar" MaxLength="100" />
+          <Property Name="Desription" Type="varchar" MaxLength="200" />
         </EntityType>
-        <EntityType Name="Received">
+        <EntityType Name="MaterialSubCategory">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TransactionSourceId" Type="int" />
-          <Property Name="TransactionReferenceNo" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="InvoiceDate" Type="datetime" Nullable="false" />
-          <Property Name="MaterialTypeId" Type="int" />
-          <Property Name="SupplierId" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="SubCategoryName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Desription" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="PlantInfo">
+          <Key>
+            <PropertyRef Name="PlantID" />
+          </Key>
+          <Property Name="PlantID" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="PlantName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="PalntAddress" Type="varchar" MaxLength="2000" />
+          <Property Name="IsDefault" Type="varchar" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Receive">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReceiveSourceId" Type="int" />
+          <Property Name="ReceiveReferenceNo" Type="varchar" MaxLength="50" />
+          <Property Name="ReceiveReferenceDate" Type="datetime" />
+          <Property Name="SupplierId" Type="varchar" MaxLength="20" />
           <Property Name="GRNNo" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="GRNDate" Type="datetime" Nullable="false" />
           <Property Name="ChallanNo" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="ChallanDate" Type="datetime" Nullable="false" />
-          <Property Name="Comments" Type="varchar" MaxLength="200" />
-          <Property Name="InvoiceQuantity" Type="int" Nullable="false" />
-          <Property Name="ReceivedQuantity" Type="int" Nullable="false" />
-          <Property Name="DamagedQuantity" Type="int" />
-          <Property Name="OutStandingQuantity" Type="int" />
-          <Property Name="ShortageQuantity" Type="int" />
-          <Property Name="BatchNo" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="ManufacturerId" Type="int" />
-          <Property Name="ManufacturerLotNo" Type="varchar" MaxLength="50" />
-          <Property Name="LotQuantity" Type="int" />
-          <Property Name="NoOfPack" Type="int" />
-          <Property Name="VAT" Type="int" />
           <Property Name="VATChallanNo" Type="varchar" MaxLength="50" />
           <Property Name="VATChallanDate" Type="datetime" />
+          <Property Name="ReceiveText" Type="varchar" MaxLength="200" />
+          <Property Name="PlantId" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="FiscalYear" Type="int" />
+          <Property Name="IsPosted" Type="tinyint" />
+          <Property Name="PostBy" Type="varchar" MaxLength="20" />
+          <Property Name="PostDate" Type="datetime" />
+          <Property Name="IsPaid" Type="tinyint" />
+          <Property Name="PaidUserId" Type="varchar" MaxLength="20" />
+          <Property Name="PaidDate" Type="datetime" />
+          <Property Name="EntryBy" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="EntryDate" Type="datetime" />
+          <Property Name="EditBy" Type="varchar" MaxLength="20" />
+          <Property Name="EditDate" Type="datetime" />
         </EntityType>
         <EntityType Name="ReceiveDetail">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ReceiveId" Type="int" />
-          <Property Name="OrderNo" Type="varchar" MaxLength="50" />
-          <Property Name="ItemCode" Type="varchar" MaxLength="50" />
-          <Property Name="ItemName" Type="varchar" MaxLength="200" />
-          <Property Name="UnitId" Type="int" />
-          <Property Name="OrderQuantity" Type="int" />
-          <Property Name="VAT" Type="float" />
-          <Property Name="ReceivedQuantity" Type="int" />
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReceiveId" Type="bigint" Nullable="false" />
+          <Property Name="MaterialCode" Type="varchar" MaxLength="20" />
+          <Property Name="OrderQuantity" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="ChallanQuantity" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="ReceivedQuantity" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="DetailUnit" Type="varchar" MaxLength="20" />
+          <Property Name="DetailQuantity" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="UnitPrice" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="VatPercent" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="VatAmount" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="BatchNo" Type="varchar" MaxLength="100" />
+          <Property Name="ManufacturerId" Type="varchar" MaxLength="20" />
+          <Property Name="ManufacturerLotNo" Type="varchar" MaxLength="50" />
+          <Property Name="LotQuantity" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="NoOfPack" Type="int" />
+          <Property Name="IsQCReleased" Type="tinyint" />
+          <Property Name="RestrictedQuantity" Type="numeric" Precision="18" Scale="2" />
         </EntityType>
-        <EntityType Name="Supplier">
+        <EntityType Name="Role">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="SupplierName" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="SupplierAddress" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="RoleName" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="TransactionSource">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TransactionSourceName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TransactionSource" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ShortName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="TransactionType" Type="varchar" MaxLength="30" Nullable="false" />
         </EntityType>
-        <EntityType Name="Unit">
+        <EntityType Name="UserManager">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UnitName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="EntryBy" Type="int" Nullable="false" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="EditBy" Type="int" />
+          <Property Name="EditDate" Type="datetime" />
         </EntityType>
-        <Association Name="fk_ManufacturerId">
-          <End Role="Manufacturer" Type="Self.Manufacturer" Multiplicity="0..1" />
-          <End Role="Received" Type="Self.Received" Multiplicity="*" />
+        <Association Name="Fk_EditBy">
+          <End Role="UserManager" Type="Self.UserManager" Multiplicity="0..1" />
+          <End Role="UserManager1" Type="Self.UserManager" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Manufacturer">
+            <Principal Role="UserManager">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Received">
-              <PropertyRef Name="ManufacturerId" />
+            <Dependent Role="UserManager1">
+              <PropertyRef Name="EditBy" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_MaterialTypeId">
-          <End Role="MaterialType" Type="Self.MaterialType" Multiplicity="0..1" />
-          <End Role="Received" Type="Self.Received" Multiplicity="*" />
+        <Association Name="Fk_EntryBy">
+          <End Role="UserManager" Type="Self.UserManager" Multiplicity="1" />
+          <End Role="UserManager1" Type="Self.UserManager" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="MaterialType">
+            <Principal Role="UserManager">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Received">
-              <PropertyRef Name="MaterialTypeId" />
+            <Dependent Role="UserManager1">
+              <PropertyRef Name="EntryBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_MaterialMaterialSubCategory">
+          <End Role="MaterialSubCategory" Type="Self.MaterialSubCategory" Multiplicity="1" />
+          <End Role="Material" Type="Self.Material" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MaterialSubCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Material">
+              <PropertyRef Name="SubCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_MaterialSubCategoryMaterialCategory">
+          <End Role="MaterialCategory" Type="Self.MaterialCategory" Multiplicity="1" />
+          <End Role="MaterialSubCategory" Type="Self.MaterialSubCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MaterialCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MaterialSubCategory">
+              <PropertyRef Name="CategoryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_ReceiveId">
-          <End Role="Received" Type="Self.Received" Multiplicity="0..1" />
+          <End Role="Receive" Type="Self.Receive" Multiplicity="1" />
           <End Role="ReceiveDetail" Type="Self.ReceiveDetail" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Received">
+            <Principal Role="Receive">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="ReceiveDetail">
@@ -120,199 +194,284 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_SupplierId">
-          <End Role="Supplier" Type="Self.Supplier" Multiplicity="1" />
-          <End Role="Received" Type="Self.Received" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Supplier">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Received">
-              <PropertyRef Name="SupplierId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_TransactionSourceId">
+        <Association Name="fk_ReceiveSourceId">
           <End Role="TransactionSource" Type="Self.TransactionSource" Multiplicity="0..1" />
-          <End Role="Received" Type="Self.Received" Multiplicity="*" />
+          <End Role="Receive" Type="Self.Receive" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TransactionSource">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Received">
-              <PropertyRef Name="TransactionSourceId" />
+            <Dependent Role="Receive">
+              <PropertyRef Name="ReceiveSourceId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_UnitId">
-          <End Role="Unit" Type="Self.Unit" Multiplicity="0..1" />
-          <End Role="ReceiveDetail" Type="Self.ReceiveDetail" Multiplicity="*" />
+        <Association Name="Fk_roleId">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="UserManager" Type="Self.UserManager" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Unit">
+            <Principal Role="Role">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="ReceiveDetail">
-              <PropertyRef Name="UnitId" />
+            <Dependent Role="UserManager">
+              <PropertyRef Name="RoleId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="InventoryModelStoreContainer">
-          <EntitySet Name="Manufacturer" EntityType="Self.Manufacturer" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="MaterialType" EntityType="Self.MaterialType" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Received" EntityType="Self.Received" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Material" EntityType="Self.Material" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MaterialCategory" EntityType="Self.MaterialCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MaterialSubCategory" EntityType="Self.MaterialSubCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PlantInfo" EntityType="Self.PlantInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Receive" EntityType="Self.Receive" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReceiveDetail" EntityType="Self.ReceiveDetail" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TransactionSource" EntityType="Self.TransactionSource" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Unit" EntityType="Self.Unit" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="fk_ManufacturerId" Association="Self.fk_ManufacturerId">
-            <End Role="Manufacturer" EntitySet="Manufacturer" />
-            <End Role="Received" EntitySet="Received" />
+          <EntitySet Name="UserManager" EntityType="Self.UserManager" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="Fk_EditBy" Association="Self.Fk_EditBy">
+            <End Role="UserManager" EntitySet="UserManager" />
+            <End Role="UserManager1" EntitySet="UserManager" />
           </AssociationSet>
-          <AssociationSet Name="fk_MaterialTypeId" Association="Self.fk_MaterialTypeId">
-            <End Role="MaterialType" EntitySet="MaterialType" />
-            <End Role="Received" EntitySet="Received" />
+          <AssociationSet Name="Fk_EntryBy" Association="Self.Fk_EntryBy">
+            <End Role="UserManager" EntitySet="UserManager" />
+            <End Role="UserManager1" EntitySet="UserManager" />
+          </AssociationSet>
+          <AssociationSet Name="fk_MaterialMaterialSubCategory" Association="Self.fk_MaterialMaterialSubCategory">
+            <End Role="MaterialSubCategory" EntitySet="MaterialSubCategory" />
+            <End Role="Material" EntitySet="Material" />
+          </AssociationSet>
+          <AssociationSet Name="fk_MaterialSubCategoryMaterialCategory" Association="Self.fk_MaterialSubCategoryMaterialCategory">
+            <End Role="MaterialCategory" EntitySet="MaterialCategory" />
+            <End Role="MaterialSubCategory" EntitySet="MaterialSubCategory" />
           </AssociationSet>
           <AssociationSet Name="fk_ReceiveId" Association="Self.fk_ReceiveId">
-            <End Role="Received" EntitySet="Received" />
+            <End Role="Receive" EntitySet="Receive" />
             <End Role="ReceiveDetail" EntitySet="ReceiveDetail" />
           </AssociationSet>
-          <AssociationSet Name="fk_SupplierId" Association="Self.fk_SupplierId">
-            <End Role="Supplier" EntitySet="Supplier" />
-            <End Role="Received" EntitySet="Received" />
-          </AssociationSet>
-          <AssociationSet Name="fk_TransactionSourceId" Association="Self.fk_TransactionSourceId">
+          <AssociationSet Name="fk_ReceiveSourceId" Association="Self.fk_ReceiveSourceId">
             <End Role="TransactionSource" EntitySet="TransactionSource" />
-            <End Role="Received" EntitySet="Received" />
+            <End Role="Receive" EntitySet="Receive" />
           </AssociationSet>
-          <AssociationSet Name="fk_UnitId" Association="Self.fk_UnitId">
-            <End Role="Unit" EntitySet="Unit" />
-            <End Role="ReceiveDetail" EntitySet="ReceiveDetail" />
+          <AssociationSet Name="Fk_roleId" Association="Self.Fk_roleId">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="UserManager" EntitySet="UserManager" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="InventoryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Manufacturer">
+        <EntityContainer Name="InventoryEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Materials" EntityType="InventoryModel.Material" />
+          <EntitySet Name="MaterialCategories" EntityType="InventoryModel.MaterialCategory" />
+          <EntitySet Name="MaterialSubCategories" EntityType="InventoryModel.MaterialSubCategory" />
+          <EntitySet Name="PlantInfoes" EntityType="InventoryModel.PlantInfo" />
+          <EntitySet Name="Receives" EntityType="InventoryModel.Receive" />
+          <EntitySet Name="ReceiveDetails" EntityType="InventoryModel.ReceiveDetail" />
+          <EntitySet Name="Roles" EntityType="InventoryModel.Role" />
+          <EntitySet Name="TransactionSources" EntityType="InventoryModel.TransactionSource" />
+          <EntitySet Name="UserManagers" EntityType="InventoryModel.UserManager" />
+          <AssociationSet Name="fk_MaterialMaterialSubCategory" Association="InventoryModel.fk_MaterialMaterialSubCategory">
+            <End Role="MaterialSubCategory" EntitySet="MaterialSubCategories" />
+            <End Role="Material" EntitySet="Materials" />
+          </AssociationSet>
+          <AssociationSet Name="fk_MaterialSubCategoryMaterialCategory" Association="InventoryModel.fk_MaterialSubCategoryMaterialCategory">
+            <End Role="MaterialCategory" EntitySet="MaterialCategories" />
+            <End Role="MaterialSubCategory" EntitySet="MaterialSubCategories" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ReceiveId" Association="InventoryModel.fk_ReceiveId">
+            <End Role="Receive" EntitySet="Receives" />
+            <End Role="ReceiveDetail" EntitySet="ReceiveDetails" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ReceiveSourceId" Association="InventoryModel.fk_ReceiveSourceId">
+            <End Role="TransactionSource" EntitySet="TransactionSources" />
+            <End Role="Receive" EntitySet="Receives" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_roleId" Association="InventoryModel.Fk_roleId">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="UserManager" EntitySet="UserManagers" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_EditBy" Association="InventoryModel.Fk_EditBy">
+            <End Role="UserManager" EntitySet="UserManagers" />
+            <End Role="UserManager1" EntitySet="UserManagers" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_EntryBy" Association="InventoryModel.Fk_EntryBy">
+            <End Role="UserManager" EntitySet="UserManagers" />
+            <End Role="UserManager1" EntitySet="UserManagers" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Material">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="MaterialCode" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ManufacturerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Receiveds" Relationship="Self.fk_ManufacturerId" FromRole="Manufacturer" ToRole="Received" />
+          <Property Name="MaterialCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="MaterialName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SubCategoryId" Type="Int32" Nullable="false" />
+          <Property Name="Unit" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MaxStockQty" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ReOrderLevel" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="HSCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LeadTimeID" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="BusiCode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SubBusiCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="CreateBy" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="EditBy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="EditeDate" Type="DateTime" Precision="3" />
+          <Property Name="PlantCode" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="PartNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="MaterialSubCategory" Relationship="InventoryModel.fk_MaterialMaterialSubCategory" FromRole="Material" ToRole="MaterialSubCategory" />
         </EntityType>
-        <EntityType Name="MaterialType">
+        <EntityType Name="MaterialCategory">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Receiveds" Relationship="Self.fk_MaterialTypeId" FromRole="MaterialType" ToRole="Received" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="CategoryName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Desription" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="MaterialSubCategories" Relationship="InventoryModel.fk_MaterialSubCategoryMaterialCategory" FromRole="MaterialCategory" ToRole="MaterialSubCategory" />
         </EntityType>
-        <EntityType Name="Received">
+        <EntityType Name="MaterialSubCategory">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TransactionSourceId" Type="Int32" />
-          <Property Name="TransactionReferenceNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="InvoiceDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="MaterialTypeId" Type="Int32" />
-          <Property Name="SupplierId" Type="Int32" Nullable="false" />
-          <Property Name="GRNNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="SubCategoryName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Desription" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Materials" Relationship="InventoryModel.fk_MaterialMaterialSubCategory" FromRole="MaterialSubCategory" ToRole="Material" />
+          <NavigationProperty Name="MaterialCategory" Relationship="InventoryModel.fk_MaterialSubCategoryMaterialCategory" FromRole="MaterialSubCategory" ToRole="MaterialCategory" />
+        </EntityType>
+        <EntityType Name="PlantInfo">
+          <Key>
+            <PropertyRef Name="PlantID" />
+          </Key>
+          <Property Name="PlantID" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="PlantName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PalntAddress" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="IsDefault" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Receive">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReceiveSourceId" Type="Int32" />
+          <Property Name="ReceiveReferenceNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ReceiveReferenceDate" Type="DateTime" Precision="3" />
+          <Property Name="SupplierId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="GRNNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="GRNDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ChallanNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ChallanNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ChallanDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Comments" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="InvoiceQuantity" Type="Int32" Nullable="false" />
-          <Property Name="ReceivedQuantity" Type="Int32" Nullable="false" />
-          <Property Name="DamagedQuantity" Type="Int32" />
-          <Property Name="OutStandingQuantity" Type="Int32" />
-          <Property Name="ShortageQuantity" Type="Int32" />
-          <Property Name="BatchNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ManufacturerId" Type="Int32" />
-          <Property Name="ManufacturerLotNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="LotQuantity" Type="Int32" />
-          <Property Name="NoOfPack" Type="Int32" />
-          <Property Name="VAT" Type="Int32" />
           <Property Name="VATChallanNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="VATChallanDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Manufacturer" Relationship="Self.fk_ManufacturerId" FromRole="Received" ToRole="Manufacturer" />
-          <NavigationProperty Name="MaterialType" Relationship="Self.fk_MaterialTypeId" FromRole="Received" ToRole="MaterialType" />
-          <NavigationProperty Name="ReceiveDetails" Relationship="Self.fk_ReceiveId" FromRole="Received" ToRole="ReceiveDetail" />
-          <NavigationProperty Name="Supplier" Relationship="Self.fk_SupplierId" FromRole="Received" ToRole="Supplier" />
-          <NavigationProperty Name="TransactionSource" Relationship="Self.fk_TransactionSourceId" FromRole="Received" ToRole="TransactionSource" />
+          <Property Name="ReceiveText" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="PlantId" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="FiscalYear" Type="Int32" />
+          <Property Name="IsPosted" Type="Byte" />
+          <Property Name="PostBy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PostDate" Type="DateTime" Precision="3" />
+          <Property Name="IsPaid" Type="Byte" />
+          <Property Name="PaidUserId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PaidDate" Type="DateTime" Precision="3" />
+          <Property Name="EntryBy" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="EntryDate" Type="DateTime" Precision="3" />
+          <Property Name="EditBy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="EditDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ReceiveDetails" Relationship="InventoryModel.fk_ReceiveId" FromRole="Receive" ToRole="ReceiveDetail" />
+          <NavigationProperty Name="TransactionSource" Relationship="InventoryModel.fk_ReceiveSourceId" FromRole="Receive" ToRole="TransactionSource" />
         </EntityType>
         <EntityType Name="ReceiveDetail">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ReceiveId" Type="Int32" />
-          <Property Name="OrderNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ItemCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ItemName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="UnitId" Type="Int32" />
-          <Property Name="OrderQuantity" Type="Int32" />
-          <Property Name="VAT" Type="Double" />
-          <Property Name="ReceivedQuantity" Type="Int32" />
-          <NavigationProperty Name="Received" Relationship="Self.fk_ReceiveId" FromRole="ReceiveDetail" ToRole="Received" />
-          <NavigationProperty Name="Unit" Relationship="Self.fk_UnitId" FromRole="ReceiveDetail" ToRole="Unit" />
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReceiveId" Type="Int64" Nullable="false" />
+          <Property Name="MaterialCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="OrderQuantity" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ChallanQuantity" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ReceivedQuantity" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="DetailUnit" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DetailQuantity" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="UnitPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="VatPercent" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="VatAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="BatchNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ManufacturerId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ManufacturerLotNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LotQuantity" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="NoOfPack" Type="Int32" />
+          <Property Name="IsQCReleased" Type="Byte" />
+          <Property Name="RestrictedQuantity" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="Receive" Relationship="InventoryModel.fk_ReceiveId" FromRole="ReceiveDetail" ToRole="Receive" />
         </EntityType>
-        <EntityType Name="Supplier">
+        <EntityType Name="Role">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Receiveds" Relationship="Self.fk_SupplierId" FromRole="Supplier" ToRole="Received" />
-          <Property Name="SupplierName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="SupplierAddress" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UserManagers" Relationship="InventoryModel.Fk_roleId" FromRole="Role" ToRole="UserManager" />
         </EntityType>
         <EntityType Name="TransactionSource">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TransactionSourceName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Receiveds" Relationship="Self.fk_TransactionSourceId" FromRole="TransactionSource" ToRole="Received" />
+          <Property Name="TransactionSource1" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ShortName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="TransactionType" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Receives" Relationship="InventoryModel.fk_ReceiveSourceId" FromRole="TransactionSource" ToRole="Receive" />
         </EntityType>
-        <EntityType Name="Unit">
+        <EntityType Name="UserManager">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UnitName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="ReceiveDetails" Relationship="Self.fk_UnitId" FromRole="Unit" ToRole="ReceiveDetail" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="EntryBy" Type="Int32" Nullable="false" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EditBy" Type="Int32" />
+          <Property Name="EditDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Role" Relationship="InventoryModel.Fk_roleId" FromRole="UserManager" ToRole="Role" />
+          <NavigationProperty Name="UserManager1" Relationship="InventoryModel.Fk_EditBy" FromRole="UserManager" ToRole="UserManager1" />
+          <NavigationProperty Name="UserManager2" Relationship="InventoryModel.Fk_EditBy" FromRole="UserManager1" ToRole="UserManager" />
+          <NavigationProperty Name="UserManager11" Relationship="InventoryModel.Fk_EntryBy" FromRole="UserManager" ToRole="UserManager1" />
+          <NavigationProperty Name="UserManager3" Relationship="InventoryModel.Fk_EntryBy" FromRole="UserManager1" ToRole="UserManager" />
         </EntityType>
-        <Association Name="fk_ManufacturerId">
-          <End Role="Manufacturer" Type="Self.Manufacturer" Multiplicity="0..1" />
-          <End Role="Received" Type="Self.Received" Multiplicity="*" />
+        <Association Name="fk_MaterialMaterialSubCategory">
+          <End Type="InventoryModel.MaterialSubCategory" Role="MaterialSubCategory" Multiplicity="1" />
+          <End Type="InventoryModel.Material" Role="Material" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Manufacturer">
+            <Principal Role="MaterialSubCategory">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Received">
-              <PropertyRef Name="ManufacturerId" />
+            <Dependent Role="Material">
+              <PropertyRef Name="SubCategoryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_MaterialTypeId">
-          <End Role="MaterialType" Type="Self.MaterialType" Multiplicity="0..1" />
-          <End Role="Received" Type="Self.Received" Multiplicity="*" />
+        <Association Name="fk_MaterialSubCategoryMaterialCategory">
+          <End Type="InventoryModel.MaterialCategory" Role="MaterialCategory" Multiplicity="1" />
+          <End Type="InventoryModel.MaterialSubCategory" Role="MaterialSubCategory" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="MaterialType">
+            <Principal Role="MaterialCategory">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Received">
-              <PropertyRef Name="MaterialTypeId" />
+            <Dependent Role="MaterialSubCategory">
+              <PropertyRef Name="CategoryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_ReceiveId">
-          <End Role="Received" Type="Self.Received" Multiplicity="0..1" />
-          <End Role="ReceiveDetail" Type="Self.ReceiveDetail" Multiplicity="*" />
+          <End Type="InventoryModel.Receive" Role="Receive" Multiplicity="1" />
+          <End Type="InventoryModel.ReceiveDetail" Role="ReceiveDetail" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Received">
+            <Principal Role="Receive">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="ReceiveDetail">
@@ -320,164 +479,195 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_SupplierId">
-          <End Role="Supplier" Type="Self.Supplier" Multiplicity="1" />
-          <End Role="Received" Type="Self.Received" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Supplier">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Received">
-              <PropertyRef Name="SupplierId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_TransactionSourceId">
-          <End Role="TransactionSource" Type="Self.TransactionSource" Multiplicity="0..1" />
-          <End Role="Received" Type="Self.Received" Multiplicity="*" />
+        <Association Name="fk_ReceiveSourceId">
+          <End Type="InventoryModel.TransactionSource" Role="TransactionSource" Multiplicity="0..1" />
+          <End Type="InventoryModel.Receive" Role="Receive" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TransactionSource">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Received">
-              <PropertyRef Name="TransactionSourceId" />
+            <Dependent Role="Receive">
+              <PropertyRef Name="ReceiveSourceId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_UnitId">
-          <End Role="Unit" Type="Self.Unit" Multiplicity="0..1" />
-          <End Role="ReceiveDetail" Type="Self.ReceiveDetail" Multiplicity="*" />
+        <Association Name="Fk_roleId">
+          <End Type="InventoryModel.Role" Role="Role" Multiplicity="1" />
+          <End Type="InventoryModel.UserManager" Role="UserManager" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Unit">
+            <Principal Role="Role">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="ReceiveDetail">
-              <PropertyRef Name="UnitId" />
+            <Dependent Role="UserManager">
+              <PropertyRef Name="RoleId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="InventoryEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Manufacturers" EntityType="Self.Manufacturer" />
-          <EntitySet Name="MaterialTypes" EntityType="Self.MaterialType" />
-          <EntitySet Name="Receiveds" EntityType="Self.Received" />
-          <EntitySet Name="ReceiveDetails" EntityType="Self.ReceiveDetail" />
-          <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
-          <EntitySet Name="TransactionSources" EntityType="Self.TransactionSource" />
-          <EntitySet Name="Units" EntityType="Self.Unit" />
-          <AssociationSet Name="fk_ManufacturerId" Association="Self.fk_ManufacturerId">
-            <End Role="Manufacturer" EntitySet="Manufacturers" />
-            <End Role="Received" EntitySet="Receiveds" />
-          </AssociationSet>
-          <AssociationSet Name="fk_MaterialTypeId" Association="Self.fk_MaterialTypeId">
-            <End Role="MaterialType" EntitySet="MaterialTypes" />
-            <End Role="Received" EntitySet="Receiveds" />
-          </AssociationSet>
-          <AssociationSet Name="fk_ReceiveId" Association="Self.fk_ReceiveId">
-            <End Role="Received" EntitySet="Receiveds" />
-            <End Role="ReceiveDetail" EntitySet="ReceiveDetails" />
-          </AssociationSet>
-          <AssociationSet Name="fk_SupplierId" Association="Self.fk_SupplierId">
-            <End Role="Supplier" EntitySet="Suppliers" />
-            <End Role="Received" EntitySet="Receiveds" />
-          </AssociationSet>
-          <AssociationSet Name="fk_TransactionSourceId" Association="Self.fk_TransactionSourceId">
-            <End Role="TransactionSource" EntitySet="TransactionSources" />
-            <End Role="Received" EntitySet="Receiveds" />
-          </AssociationSet>
-          <AssociationSet Name="fk_UnitId" Association="Self.fk_UnitId">
-            <End Role="Unit" EntitySet="Units" />
-            <End Role="ReceiveDetail" EntitySet="ReceiveDetails" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema>
+        <Association Name="Fk_EditBy">
+          <End Type="InventoryModel.UserManager" Role="UserManager" Multiplicity="0..1" />
+          <End Type="InventoryModel.UserManager" Role="UserManager1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserManager">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserManager1">
+              <PropertyRef Name="EditBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Fk_EntryBy">
+          <End Type="InventoryModel.UserManager" Role="UserManager" Multiplicity="1" />
+          <End Type="InventoryModel.UserManager" Role="UserManager1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserManager">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserManager1">
+              <PropertyRef Name="EntryBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="InventoryModelStoreContainer" CdmEntityContainer="InventoryEntities">
-          <EntitySetMapping Name="Manufacturers">
-            <EntityTypeMapping TypeName="InventoryModel.Manufacturer">
-              <MappingFragment StoreEntitySet="Manufacturer">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="ManufacturerName" ColumnName="ManufacturerName" />
+          <EntitySetMapping Name="Materials">
+            <EntityTypeMapping TypeName="InventoryModel.Material">
+              <MappingFragment StoreEntitySet="Material">
+                <ScalarProperty Name="PartNo" ColumnName="PartNo" />
+                <ScalarProperty Name="PlantCode" ColumnName="PlantCode" />
+                <ScalarProperty Name="EditeDate" ColumnName="EditeDate" />
+                <ScalarProperty Name="EditBy" ColumnName="EditBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="SubBusiCode" ColumnName="SubBusiCode" />
+                <ScalarProperty Name="BusiCode" ColumnName="BusiCode" />
+                <ScalarProperty Name="LeadTimeID" ColumnName="LeadTimeID" />
+                <ScalarProperty Name="HSCode" ColumnName="HSCode" />
+                <ScalarProperty Name="ReOrderLevel" ColumnName="ReOrderLevel" />
+                <ScalarProperty Name="MaxStockQty" ColumnName="MaxStockQty" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="SubCategoryId" ColumnName="SubCategoryId" />
+                <ScalarProperty Name="MaterialName" ColumnName="MaterialName" />
+                <ScalarProperty Name="MaterialCode" ColumnName="MaterialCode" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="MaterialTypes">
-            <EntityTypeMapping TypeName="InventoryModel.MaterialType">
-              <MappingFragment StoreEntitySet="MaterialType">
+          <EntitySetMapping Name="MaterialCategories">
+            <EntityTypeMapping TypeName="InventoryModel.MaterialCategory">
+              <MappingFragment StoreEntitySet="MaterialCategory">
+                <ScalarProperty Name="Desription" ColumnName="Desription" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Receiveds">
-            <EntityTypeMapping TypeName="InventoryModel.Received">
-              <MappingFragment StoreEntitySet="Received">
+          <EntitySetMapping Name="MaterialSubCategories">
+            <EntityTypeMapping TypeName="InventoryModel.MaterialSubCategory">
+              <MappingFragment StoreEntitySet="MaterialSubCategory">
+                <ScalarProperty Name="Desription" ColumnName="Desription" />
+                <ScalarProperty Name="SubCategoryName" ColumnName="SubCategoryName" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="TransactionSourceId" ColumnName="TransactionSourceId" />
-                <ScalarProperty Name="TransactionReferenceNo" ColumnName="TransactionReferenceNo" />
-                <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
-                <ScalarProperty Name="MaterialTypeId" ColumnName="MaterialTypeId" />
-                <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
-                <ScalarProperty Name="GRNNo" ColumnName="GRNNo" />
-                <ScalarProperty Name="GRNDate" ColumnName="GRNDate" />
-                <ScalarProperty Name="ChallanNo" ColumnName="ChallanNo" />
-                <ScalarProperty Name="ChallanDate" ColumnName="ChallanDate" />
-                <ScalarProperty Name="Comments" ColumnName="Comments" />
-                <ScalarProperty Name="InvoiceQuantity" ColumnName="InvoiceQuantity" />
-                <ScalarProperty Name="ReceivedQuantity" ColumnName="ReceivedQuantity" />
-                <ScalarProperty Name="DamagedQuantity" ColumnName="DamagedQuantity" />
-                <ScalarProperty Name="OutStandingQuantity" ColumnName="OutStandingQuantity" />
-                <ScalarProperty Name="ShortageQuantity" ColumnName="ShortageQuantity" />
-                <ScalarProperty Name="BatchNo" ColumnName="BatchNo" />
-                <ScalarProperty Name="ManufacturerId" ColumnName="ManufacturerId" />
-                <ScalarProperty Name="ManufacturerLotNo" ColumnName="ManufacturerLotNo" />
-                <ScalarProperty Name="LotQuantity" ColumnName="LotQuantity" />
-                <ScalarProperty Name="NoOfPack" ColumnName="NoOfPack" />
-                <ScalarProperty Name="VAT" ColumnName="VAT" />
-                <ScalarProperty Name="VATChallanNo" ColumnName="VATChallanNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlantInfoes">
+            <EntityTypeMapping TypeName="InventoryModel.PlantInfo">
+              <MappingFragment StoreEntitySet="PlantInfo">
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+                <ScalarProperty Name="PalntAddress" ColumnName="PalntAddress" />
+                <ScalarProperty Name="PlantName" ColumnName="PlantName" />
+                <ScalarProperty Name="PlantID" ColumnName="PlantID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Receives">
+            <EntityTypeMapping TypeName="InventoryModel.Receive">
+              <MappingFragment StoreEntitySet="Receive">
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+                <ScalarProperty Name="EditBy" ColumnName="EditBy" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="EntryBy" ColumnName="EntryBy" />
+                <ScalarProperty Name="PaidDate" ColumnName="PaidDate" />
+                <ScalarProperty Name="PaidUserId" ColumnName="PaidUserId" />
+                <ScalarProperty Name="IsPaid" ColumnName="IsPaid" />
+                <ScalarProperty Name="PostDate" ColumnName="PostDate" />
+                <ScalarProperty Name="PostBy" ColumnName="PostBy" />
+                <ScalarProperty Name="IsPosted" ColumnName="IsPosted" />
+                <ScalarProperty Name="FiscalYear" ColumnName="FiscalYear" />
+                <ScalarProperty Name="PlantId" ColumnName="PlantId" />
+                <ScalarProperty Name="ReceiveText" ColumnName="ReceiveText" />
                 <ScalarProperty Name="VATChallanDate" ColumnName="VATChallanDate" />
+                <ScalarProperty Name="VATChallanNo" ColumnName="VATChallanNo" />
+                <ScalarProperty Name="ChallanDate" ColumnName="ChallanDate" />
+                <ScalarProperty Name="ChallanNo" ColumnName="ChallanNo" />
+                <ScalarProperty Name="GRNDate" ColumnName="GRNDate" />
+                <ScalarProperty Name="GRNNo" ColumnName="GRNNo" />
+                <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+                <ScalarProperty Name="ReceiveReferenceDate" ColumnName="ReceiveReferenceDate" />
+                <ScalarProperty Name="ReceiveReferenceNo" ColumnName="ReceiveReferenceNo" />
+                <ScalarProperty Name="ReceiveSourceId" ColumnName="ReceiveSourceId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ReceiveDetails">
             <EntityTypeMapping TypeName="InventoryModel.ReceiveDetail">
               <MappingFragment StoreEntitySet="ReceiveDetail">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="ReceiveId" ColumnName="ReceiveId" />
-                <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
-                <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
-                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
-                <ScalarProperty Name="UnitId" ColumnName="UnitId" />
-                <ScalarProperty Name="OrderQuantity" ColumnName="OrderQuantity" />
-                <ScalarProperty Name="VAT" ColumnName="VAT" />
+                <ScalarProperty Name="RestrictedQuantity" ColumnName="RestrictedQuantity" />
+                <ScalarProperty Name="IsQCReleased" ColumnName="IsQCReleased" />
+                <ScalarProperty Name="NoOfPack" ColumnName="NoOfPack" />
+                <ScalarProperty Name="LotQuantity" ColumnName="LotQuantity" />
+                <ScalarProperty Name="ManufacturerLotNo" ColumnName="ManufacturerLotNo" />
+                <ScalarProperty Name="ManufacturerId" ColumnName="ManufacturerId" />
+                <ScalarProperty Name="BatchNo" ColumnName="BatchNo" />
+                <ScalarProperty Name="VatAmount" ColumnName="VatAmount" />
+                <ScalarProperty Name="VatPercent" ColumnName="VatPercent" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="DetailQuantity" ColumnName="DetailQuantity" />
+                <ScalarProperty Name="DetailUnit" ColumnName="DetailUnit" />
                 <ScalarProperty Name="ReceivedQuantity" ColumnName="ReceivedQuantity" />
+                <ScalarProperty Name="ChallanQuantity" ColumnName="ChallanQuantity" />
+                <ScalarProperty Name="OrderQuantity" ColumnName="OrderQuantity" />
+                <ScalarProperty Name="MaterialCode" ColumnName="MaterialCode" />
+                <ScalarProperty Name="ReceiveId" ColumnName="ReceiveId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Suppliers">
-            <EntityTypeMapping TypeName="InventoryModel.Supplier">
-              <MappingFragment StoreEntitySet="Supplier">
-                <ScalarProperty Name="SupplierAddress" ColumnName="SupplierAddress" />
-                <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="InventoryModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                </MappingFragment>
+              </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TransactionSources">
             <EntityTypeMapping TypeName="InventoryModel.TransactionSource">
               <MappingFragment StoreEntitySet="TransactionSource">
+                <ScalarProperty Name="TransactionType" ColumnName="TransactionType" />
+                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+                <ScalarProperty Name="TransactionSource1" ColumnName="TransactionSource" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="TransactionSourceName" ColumnName="TransactionSourceName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Units">
-            <EntityTypeMapping TypeName="InventoryModel.Unit">
-              <MappingFragment StoreEntitySet="Unit">
+          <EntitySetMapping Name="UserManagers">
+            <EntityTypeMapping TypeName="InventoryModel.UserManager">
+              <MappingFragment StoreEntitySet="UserManager">
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+                <ScalarProperty Name="EditBy" ColumnName="EditBy" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="EntryBy" ColumnName="EntryBy" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UnitName" ColumnName="UnitName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

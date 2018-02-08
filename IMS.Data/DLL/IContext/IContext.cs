@@ -16,7 +16,7 @@ namespace IMS.Data.DLL.IContext
 
         bool Delete(T entity);
 
-        ICollection<T> GetAllEntity();
+        IList<T> GetAllEntity();
 
         T GetEntityById(int EntityId);
 

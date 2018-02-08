@@ -4,20 +4,23 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b54b3431ffef4fdeabaccc487707acac" Name="Diagram1">
-        <EntityTypeShape EntityType="InventoryModel.Manufacturer" Width="1.5" PointX="0.75" PointY="2.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="InventoryModel.MaterialType" Width="1.5" PointX="0.75" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="InventoryModel.Received" Width="1.5" PointX="2.875" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="InventoryModel.ReceiveDetail" Width="1.5" PointX="5" PointY="0.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="InventoryModel.Supplier" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="InventoryModel.TransactionSource" Width="1.5" PointX="5" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="InventoryModel.Unit" Width="1.5" PointX="7.75" PointY="1.5" IsExpanded="true" />
-        <AssociationConnector Association="InventoryModel.fk_ManufacturerId" ManuallyRouted="false" />
-        <AssociationConnector Association="InventoryModel.fk_MaterialTypeId" ManuallyRouted="false" />
-        <AssociationConnector Association="InventoryModel.fk_ReceiveId" ManuallyRouted="false" />
-        <AssociationConnector Association="InventoryModel.fk_SupplierId" ManuallyRouted="false" />
-        <AssociationConnector Association="InventoryModel.fk_TransactionSourceId" ManuallyRouted="false" />
-        <AssociationConnector Association="InventoryModel.fk_UnitId" ManuallyRouted="false" />
+      <Diagram DiagramId="b54b3431ffef4fdeabaccc487707acac" Name="Diagram1" ZoomLevel="86">
+        <EntityTypeShape EntityType="InventoryModel.Material" Width="1.5" PointX="5" PointY="5" />
+        <EntityTypeShape EntityType="InventoryModel.MaterialCategory" Width="1.5" PointX="0.625" PointY="5.125" />
+        <EntityTypeShape EntityType="InventoryModel.MaterialSubCategory" Width="1.5" PointX="2.625" PointY="5.125" />
+        <EntityTypeShape EntityType="InventoryModel.PlantInfo" Width="1.5" PointX="11.75" PointY="1.625" />
+        <EntityTypeShape EntityType="InventoryModel.Receive" Width="1.5" PointX="7.875" PointY="0.5" />
+        <EntityTypeShape EntityType="InventoryModel.ReceiveDetail" Width="1.5" PointX="9.875" PointY="0.5" />
+        <EntityTypeShape EntityType="InventoryModel.Role" Width="1.5" PointX="0.875" PointY="0.5" />
+        <EntityTypeShape EntityType="InventoryModel.TransactionSource" Width="1.5" PointX="5.375" PointY="0.5" />
+        <EntityTypeShape EntityType="InventoryModel.UserManager" Width="1.5" PointX="3" PointY="0.5" />
+        <AssociationConnector Association="InventoryModel.fk_MaterialMaterialSubCategory" />
+        <AssociationConnector Association="InventoryModel.fk_MaterialSubCategoryMaterialCategory" />
+        <AssociationConnector Association="InventoryModel.fk_ReceiveId" />
+        <AssociationConnector Association="InventoryModel.fk_ReceiveSourceId" />
+        <AssociationConnector Association="InventoryModel.Fk_roleId" />
+        <AssociationConnector Association="InventoryModel.Fk_EditBy" />
+        <AssociationConnector Association="InventoryModel.Fk_EntryBy" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

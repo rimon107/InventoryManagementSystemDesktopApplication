@@ -95,4 +95,17 @@ namespace IMS.Data.Model
         [Display(Name = "Suplier Address")]
         public string SupplierAddress { get; set; }
     }
+
+    public class UserMetadata
+    {
+        
+        [Required(AllowEmptyStrings = false, ErrorMessage = "User Name Required")]
+        [Display(Name = "User Name")]
+        public string UserName { get; set; }
+
+        
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Password Required")]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
+    }
 }

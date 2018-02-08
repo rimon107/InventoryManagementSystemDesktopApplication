@@ -36,39 +36,42 @@ namespace IMS.Service.BAL
 
         public bool CreateSupplier(string SupplierName, string SupplierAddress)
         {
-            Supplier supplier = new Supplier();
-            supplier.SupplierName = SupplierName;
-            supplier.SupplierAddress = SupplierAddress;
+            //Supplier supplier = new Supplier();
+            //supplier.SupplierName = SupplierName;
+            //supplier.SupplierAddress = SupplierAddress;
 
-            if (ModelState.IsValid<Supplier>(supplier))
-            {
-                return context.CreateSupplier(supplier);
-            }
-            else
-            {
+            //if (ModelState.IsValid<Supplier>(supplier))
+            //{
+            //    return context.CreateSupplier(supplier);
+            //}
+            //else
+            //{
 
-                return false;
-            }
-            
-            
+            //    return false;
+            //}
+            throw new NotImplementedException();
+
+
 
         }
 
         public bool UpdateSupplier(int SupplierId,string SupplierName, string SupplierAddress)
         {
-            Supplier supplier = context.GetSupplierById(SupplierId);
+            //Supplier supplier = context.GetSupplierById(SupplierId);
 
-            supplier.SupplierName = SupplierName;
-            supplier.SupplierAddress = SupplierAddress;
+            //supplier.SupplierName = SupplierName;
+            //supplier.SupplierAddress = SupplierAddress;
 
-            if (ModelState.IsValid<Supplier>(supplier))
-            {
-                return context.UpdateSupplier(supplier);
-            }
-            else
-            {
-                return false;
-            }
+            //if (ModelState.IsValid<Supplier>(supplier))
+            //{
+            //    return context.UpdateSupplier(supplier);
+            //}
+            //else
+            //{
+            //    return false;
+            //}
+
+            throw new NotImplementedException();
 
 
 
@@ -76,16 +79,18 @@ namespace IMS.Service.BAL
 
         public bool DeleteSupplier(int SupplierId)
         {
-            Supplier supplier = context.GetSupplierById(SupplierId);
-            
-            if (supplier != null && supplier.Id != 0)
-            {
-                return context.DeleteSupplier(supplier);
-            }
-            else
-            {
-                return false;
-            }
+            //Supplier supplier = context.GetSupplierById(SupplierId);
+
+            //if (supplier != null && supplier.Id != 0)
+            //{
+            //    return context.DeleteSupplier(supplier);
+            //}
+            //else
+            //{
+            //    return false;
+            //}
+
+            throw new NotImplementedException();
 
 
 
@@ -93,7 +98,9 @@ namespace IMS.Service.BAL
 
         public ICollection<Supplier> GetAllSupplier()
         {
-            return context.GetAllSupplier();
+            //return context.GetAllSupplier();
+
+            throw new NotImplementedException();
         }
 
  

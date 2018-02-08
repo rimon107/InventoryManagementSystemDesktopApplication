@@ -20,62 +20,67 @@ namespace IMS.Data.DLL.Context
 
         public bool CreateSupplier(Supplier supplier)
         {
-            try
-            {
-                //var error = context.Entry(supplier).GetValidationResult();
+            //try
+            //{
+            //    //var error = context.Entry(supplier).GetValidationResult();
 
-                context.Suppliers.Add(supplier);
-                context.SaveChanges();
+            //    //context.Suppliers.Add(supplier);
+            //    context.SaveChanges();
 
-                return true;
-            }
-            catch(Exception ex)
-            {
-                return false;
-            }
+            //    return true;
+            //}
+            //catch(Exception ex)
+            //{
+            //    return false;
+            //}
+            throw new NotImplementedException();
         }
 
         public bool UpdateSupplier(Supplier supplier)
         {
-            try
-            {
-                context.Entry(supplier).State = EntityState.Modified;
-                context.SaveChanges();
+            //try
+            //{
+            //    context.Entry(supplier).State = EntityState.Modified;
+            //    context.SaveChanges();
 
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            //    return true;
+            //}
+            //catch
+            //{
+            //    return false;
+            //}
+            throw new NotImplementedException();
         }
 
         public bool DeleteSupplier(Supplier supplier)
         {
-            try
-            {
-                Supplier _supplier = context.Suppliers.Find(supplier.Id);
-                context.Suppliers.Remove(_supplier);
-                context.SaveChanges();
+            //try
+            //{
+            //    //Supplier _supplier = context.Suppliers.Find(supplier.Id);
+            //    //context.Suppliers.Remove(_supplier);
+            //    context.SaveChanges();
 
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            //    return true;
+            //}
+            //catch
+            //{
+            //    return false;
+            //}
+            throw new NotImplementedException();
         }
 
         public Supplier GetSupplierById(int SupplierId)
         {
-          
-           return context.Suppliers.Find(SupplierId);
+
+            //return context.Suppliers.Find(SupplierId);
+            throw new NotImplementedException();
                
         }
 
         public ICollection<Supplier> GetAllSupplier()
         {
-            return context.Suppliers.ToList();
+            //return context.Suppliers.ToList();
+            throw new NotImplementedException();
         }
 
         #region IDisposable Members

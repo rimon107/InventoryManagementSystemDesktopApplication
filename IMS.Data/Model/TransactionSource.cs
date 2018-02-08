@@ -17,13 +17,15 @@ namespace IMS.Data.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TransactionSource()
         {
-            this.Receiveds = new HashSet<Received>();
+            this.Receives = new HashSet<Receive>();
         }
     
         public int Id { get; set; }
-        public string TransactionSourceName { get; set; }
+        public string TransactionSource1 { get; set; }
+        public string ShortName { get; set; }
+        public string TransactionType { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Received> Receiveds { get; set; }
+        public virtual ICollection<Receive> Receives { get; set; }
     }
 }

@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Library\ModelState.cs" />
+    <Compile Include="Library\RandomNumberGenerator.cs" />
+    <Compile Include="Library\Session.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -12,18 +12,18 @@ namespace IMS.Data.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Unit
+    public partial class Role
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Unit()
+        public Role()
         {
-            this.ReceiveDetails = new HashSet<ReceiveDetail>();
+            this.UserManagers = new HashSet<UserManager>();
         }
     
         public int Id { get; set; }
-        public string UnitName { get; set; }
+        public string RoleName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ReceiveDetail> ReceiveDetails { get; set; }
+        public virtual ICollection<UserManager> UserManagers { get; set; }
     }
 }

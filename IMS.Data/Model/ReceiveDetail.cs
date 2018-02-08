@@ -14,17 +14,25 @@ namespace IMS.Data.Model
     
     public partial class ReceiveDetail
     {
-        public int Id { get; set; }
-        public Nullable<int> ReceiveId { get; set; }
-        public string OrderNo { get; set; }
-        public string ItemCode { get; set; }
-        public string ItemName { get; set; }
-        public Nullable<int> UnitId { get; set; }
-        public Nullable<int> OrderQuantity { get; set; }
-        public Nullable<double> VAT { get; set; }
-        public Nullable<int> ReceivedQuantity { get; set; }
+        public long Id { get; set; }
+        public long ReceiveId { get; set; }
+        public string MaterialCode { get; set; }
+        public Nullable<decimal> OrderQuantity { get; set; }
+        public Nullable<decimal> ChallanQuantity { get; set; }
+        public Nullable<decimal> ReceivedQuantity { get; set; }
+        public string DetailUnit { get; set; }
+        public Nullable<decimal> DetailQuantity { get; set; }
+        public Nullable<decimal> UnitPrice { get; set; }
+        public Nullable<decimal> VatPercent { get; set; }
+        public Nullable<decimal> VatAmount { get; set; }
+        public string BatchNo { get; set; }
+        public string ManufacturerId { get; set; }
+        public string ManufacturerLotNo { get; set; }
+        public Nullable<decimal> LotQuantity { get; set; }
+        public Nullable<int> NoOfPack { get; set; }
+        public Nullable<byte> IsQCReleased { get; set; }
+        public Nullable<decimal> RestrictedQuantity { get; set; }
     
-        public virtual Received Received { get; set; }
-        public virtual Unit Unit { get; set; }
+        public virtual Receive Receive { get; set; }
     }
 }

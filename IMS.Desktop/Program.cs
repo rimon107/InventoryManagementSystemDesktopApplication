@@ -1,4 +1,5 @@
 ﻿using IMS.Desktop.Views;
+using IMS.Desktop.Views.Security;
 using System;
 using System.Windows.Forms;
 
@@ -14,7 +15,7 @@ namespace IMS.Desktop
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new SupplierForm());
+            Application.Run(new MainWindow());
         }
     }
 }

@@ -25,12 +25,14 @@ namespace IMS.Data.Model
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Manufacturer> Manufacturers { get; set; }
-        public virtual DbSet<MaterialType> MaterialTypes { get; set; }
-        public virtual DbSet<Received> Receiveds { get; set; }
+        public virtual DbSet<Material> Materials { get; set; }
+        public virtual DbSet<MaterialCategory> MaterialCategories { get; set; }
+        public virtual DbSet<MaterialSubCategory> MaterialSubCategories { get; set; }
+        public virtual DbSet<PlantInfo> PlantInfoes { get; set; }
+        public virtual DbSet<Receive> Receives { get; set; }
         public virtual DbSet<ReceiveDetail> ReceiveDetails { get; set; }
-        public virtual DbSet<Supplier> Suppliers { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<TransactionSource> TransactionSources { get; set; }
-        public virtual DbSet<Unit> Units { get; set; }
+        public virtual DbSet<UserManager> UserManagers { get; set; }
     }
 }

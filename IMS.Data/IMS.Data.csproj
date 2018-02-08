@@ -49,8 +49,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\BaseEntity.cs" />
     <Compile Include="DLL\Context\Context.cs" />
+    <Compile Include="DLL\IContext\IUserContext.cs" />
+    <Compile Include="DLL\Context\UserContext.cs" />
     <Compile Include="DLL\IContext\IContext.cs" />
     <Compile Include="DLL\IContext\ISupplierContext.cs" />
     <Compile Include="DLL\Context\DllSupplierContext.cs" />
@@ -69,27 +70,33 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Entity.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Model\Manufacturer.cs">
+    <Compile Include="Model\Material.cs">
       <DependentUpon>Entity.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\MaterialType.cs">
+    <Compile Include="Model\MaterialCategory.cs">
+      <DependentUpon>Entity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MaterialSubCategory.cs">
       <DependentUpon>Entity.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Metadata.cs" />
     <Compile Include="Model\PartialClasses.cs" />
-    <Compile Include="Model\Received.cs">
+    <Compile Include="Model\PlantInfo.cs">
+      <DependentUpon>Entity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Receive.cs">
       <DependentUpon>Entity.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\ReceiveDetail.cs">
       <DependentUpon>Entity.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Supplier.cs">
+    <Compile Include="Model\Role.cs">
       <DependentUpon>Entity.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\TransactionSource.cs">
       <DependentUpon>Entity.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Unit.cs">
+    <Compile Include="Model\UserManager.cs">
       <DependentUpon>Entity.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

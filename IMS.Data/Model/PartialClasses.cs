@@ -9,7 +9,13 @@ namespace IMS.Data.Model
     }
 
     [MetadataType(typeof(SupplierMetadata))]
-    public partial class Supplier : BaseEntity
+    public partial class Supplier 
+    {
+
+    }
+
+    [MetadataType(typeof(UserMetadata))]
+    public partial class UserManager
     {
 
     }

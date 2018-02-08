@@ -10,7 +10,7 @@ namespace IMS.Data.DLL.Context
 {
     public class Context<T> : IContext<T>  where T: class
     {
-        //private readonly IDbContext _context;
+        private bool disposed;
         private readonly InventoryEntities context;
         private IDbSet<T> entities;
 
@@ -41,7 +41,7 @@ namespace IMS.Data.DLL.Context
 
         
 
-        public ICollection<T> GetAllEntity()
+        public IList<T> GetAllEntity()
         {
             return entities.ToList();
         }
@@ -70,8 +70,6 @@ namespace IMS.Data.DLL.Context
         {
             try
             {
-
-
                 if (context.Entry(entity).State == EntityState.Detached)
                 {
                     entities.Attach(entity);
@@ -86,5 +84,29 @@ namespace IMS.Data.DLL.Context
                 return false;
             }
         }
+
+        #region IDisposable Members
+
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        private void Dispose(bool disposing)
+        {
+            if (disposed || !disposing)
+                return;
+
+            if (context != null)
+                //context.Dispose();
+
+                disposed = true;
+        }
+
+        #endregion
     }
 }

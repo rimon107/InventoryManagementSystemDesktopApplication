@@ -12,44 +12,41 @@ namespace IMS.Data.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Received
+    public partial class Receive
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Received()
+        public Receive()
         {
             this.ReceiveDetails = new HashSet<ReceiveDetail>();
         }
     
-        public int Id { get; set; }
-        public Nullable<int> TransactionSourceId { get; set; }
-        public string TransactionReferenceNo { get; set; }
-        public System.DateTime InvoiceDate { get; set; }
-        public Nullable<int> MaterialTypeId { get; set; }
-        public int SupplierId { get; set; }
+        public long Id { get; set; }
+        public Nullable<int> ReceiveSourceId { get; set; }
+        public string ReceiveReferenceNo { get; set; }
+        public Nullable<System.DateTime> ReceiveReferenceDate { get; set; }
+        public string SupplierId { get; set; }
         public string GRNNo { get; set; }
         public System.DateTime GRNDate { get; set; }
         public string ChallanNo { get; set; }
         public System.DateTime ChallanDate { get; set; }
-        public string Comments { get; set; }
-        public int InvoiceQuantity { get; set; }
-        public int ReceivedQuantity { get; set; }
-        public Nullable<int> DamagedQuantity { get; set; }
-        public Nullable<int> OutStandingQuantity { get; set; }
-        public Nullable<int> ShortageQuantity { get; set; }
-        public string BatchNo { get; set; }
-        public Nullable<int> ManufacturerId { get; set; }
-        public string ManufacturerLotNo { get; set; }
-        public Nullable<int> LotQuantity { get; set; }
-        public Nullable<int> NoOfPack { get; set; }
-        public Nullable<int> VAT { get; set; }
         public string VATChallanNo { get; set; }
         public Nullable<System.DateTime> VATChallanDate { get; set; }
+        public string ReceiveText { get; set; }
+        public string PlantId { get; set; }
+        public Nullable<int> FiscalYear { get; set; }
+        public Nullable<byte> IsPosted { get; set; }
+        public string PostBy { get; set; }
+        public Nullable<System.DateTime> PostDate { get; set; }
+        public Nullable<byte> IsPaid { get; set; }
+        public string PaidUserId { get; set; }
+        public Nullable<System.DateTime> PaidDate { get; set; }
+        public string EntryBy { get; set; }
+        public Nullable<System.DateTime> EntryDate { get; set; }
+        public string EditBy { get; set; }
+        public Nullable<System.DateTime> EditDate { get; set; }
     
-        public virtual Manufacturer Manufacturer { get; set; }
-        public virtual MaterialType MaterialType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ReceiveDetail> ReceiveDetails { get; set; }
-        public virtual Supplier Supplier { get; set; }
         public virtual TransactionSource TransactionSource { get; set; }
     }
 }

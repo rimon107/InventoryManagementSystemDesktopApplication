@@ -12,18 +12,21 @@ namespace IMS.Data.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class MaterialType
+    public partial class MaterialSubCategory
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public MaterialType()
+        public MaterialSubCategory()
         {
-            this.Receiveds = new HashSet<Received>();
+            this.Materials = new HashSet<Material>();
         }
     
         public int Id { get; set; }
-        public string TypeName { get; set; }
+        public int CategoryId { get; set; }
+        public string SubCategoryName { get; set; }
+        public string Desription { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Received> Receiveds { get; set; }
+        public virtual ICollection<Material> Materials { get; set; }
+        public virtual MaterialCategory MaterialCategory { get; set; }
     }
 }

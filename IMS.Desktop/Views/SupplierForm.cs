@@ -100,9 +100,7 @@ namespace IMS.Desktop.Views
 
             gvSupplier.Columns["SupplierName"].Width = 100;
             gvSupplier.Columns["SupplierAddress"].Width = 300;
-
-
-
+            
         }
 
         private void gvSupplier_CellClick(object sender, DataGridViewCellEventArgs e)
