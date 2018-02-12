@@ -37,10 +37,7 @@ namespace IMS.Data.DLL.Context
 
             return entity;
         }
-
-
         
-
         public IList<T> GetAllEntity()
         {
             return entities.ToList();

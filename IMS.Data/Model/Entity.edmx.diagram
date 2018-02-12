@@ -21,6 +21,7 @@
         <AssociationConnector Association="InventoryModel.Fk_roleId" />
         <AssociationConnector Association="InventoryModel.Fk_EditBy" />
         <AssociationConnector Association="InventoryModel.Fk_EntryBy" />
+        <EntityTypeShape EntityType="InventoryModel.Supplier" Width="1.5" PointX="7.375" PointY="7.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

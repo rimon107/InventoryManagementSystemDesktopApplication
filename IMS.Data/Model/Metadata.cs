@@ -108,4 +108,9 @@ namespace IMS.Data.Model
         [Display(Name = "Password")]
         public string Password { get; set; }
     }
+
+    public class ReceiveDetailMetadata
+    {
+       
+    }
 }

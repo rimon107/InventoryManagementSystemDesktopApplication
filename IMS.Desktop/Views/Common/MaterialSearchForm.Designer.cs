@@ -1,6 +1,6 @@
 ﻿namespace IMS.Desktop.Views.Common
 {
-    partial class SupplierSearchForm
+    partial class MaterialSearchForm
     {
         /// <summary>
         /// Required designer variable.
@@ -30,82 +30,82 @@
         {
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.gvSupplier = new System.Windows.Forms.DataGridView();
-            this.btnSuplierFind = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.gvMaterial = new System.Windows.Forms.DataGridView();
+            this.btnMaterialFind = new System.Windows.Forms.Button();
+            this.txtMaterialSearch = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.gvSupplier)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvMaterial)).BeginInit();
             this.SuspendLayout();
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(483, 451);
+            this.btnOk.Location = new System.Drawing.Point(490, 463);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
-            this.btnOk.TabIndex = 17;
+            this.btnOk.TabIndex = 23;
             this.btnOk.Text = "Ok";
             this.btnOk.UseVisualStyleBackColor = true;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(564, 451);
+            this.btnCancel.Location = new System.Drawing.Point(571, 463);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 16;
+            this.btnCancel.TabIndex = 22;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // gvSupplier
+            // gvMaterial
             // 
-            this.gvSupplier.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gvSupplier.Location = new System.Drawing.Point(17, 51);
-            this.gvSupplier.Name = "gvSupplier";
-            this.gvSupplier.Size = new System.Drawing.Size(622, 384);
-            this.gvSupplier.TabIndex = 15;
-            this.gvSupplier.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvSupplier_CellDoubleClick);
+            this.gvMaterial.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gvMaterial.Location = new System.Drawing.Point(24, 63);
+            this.gvMaterial.Name = "gvMaterial";
+            this.gvMaterial.Size = new System.Drawing.Size(622, 384);
+            this.gvMaterial.TabIndex = 21;
+            this.gvMaterial.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvMaterial_CellDoubleClick);
             // 
-            // btnSuplierFind
+            // btnMaterialFind
             // 
-            this.btnSuplierFind.Location = new System.Drawing.Point(611, 10);
-            this.btnSuplierFind.Name = "btnSuplierFind";
-            this.btnSuplierFind.Size = new System.Drawing.Size(28, 23);
-            this.btnSuplierFind.TabIndex = 14;
-            this.btnSuplierFind.Text = "...";
-            this.btnSuplierFind.UseVisualStyleBackColor = true;
+            this.btnMaterialFind.Location = new System.Drawing.Point(618, 22);
+            this.btnMaterialFind.Name = "btnMaterialFind";
+            this.btnMaterialFind.Size = new System.Drawing.Size(28, 23);
+            this.btnMaterialFind.TabIndex = 20;
+            this.btnMaterialFind.Text = "...";
+            this.btnMaterialFind.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // txtMaterialSearch
             // 
-            this.textBox1.Location = new System.Drawing.Point(47, 12);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(558, 20);
-            this.textBox1.TabIndex = 13;
+            this.txtMaterialSearch.Location = new System.Drawing.Point(54, 24);
+            this.txtMaterialSearch.Name = "txtMaterialSearch";
+            this.txtMaterialSearch.Size = new System.Drawing.Size(558, 20);
+            this.txtMaterialSearch.TabIndex = 19;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(14, 15);
+            this.label1.Location = new System.Drawing.Point(21, 27);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(27, 13);
-            this.label1.TabIndex = 12;
+            this.label1.TabIndex = 18;
             this.label1.Text = "Find";
             // 
-            // SupplierSearchForm
+            // MaterialSearchForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(652, 505);
+            this.ClientSize = new System.Drawing.Size(669, 507);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.gvSupplier);
-            this.Controls.Add(this.btnSuplierFind);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.gvMaterial);
+            this.Controls.Add(this.btnMaterialFind);
+            this.Controls.Add(this.txtMaterialSearch);
             this.Controls.Add(this.label1);
-            this.Name = "SupplierSearchForm";
+            this.Name = "MaterialSearchForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "SupplierSearchForm";
-            ((System.ComponentModel.ISupportInitialize)(this.gvSupplier)).EndInit();
+            this.Text = "MaterialSearchForm";
+            ((System.ComponentModel.ISupportInitialize)(this.gvMaterial)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -115,9 +115,9 @@
 
         private System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.DataGridView gvSupplier;
-        private System.Windows.Forms.Button btnSuplierFind;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.DataGridView gvMaterial;
+        private System.Windows.Forms.Button btnMaterialFind;
+        private System.Windows.Forms.TextBox txtMaterialSearch;
         private System.Windows.Forms.Label label1;
     }
 }

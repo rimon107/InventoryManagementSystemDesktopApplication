@@ -57,7 +57,7 @@ namespace IMS.Desktop.Views
             if (res)
             {
                 MessageBox.Show("Success");
-                Refresh();
+                ClearForm();
             }
             else
             {
@@ -78,7 +78,7 @@ namespace IMS.Desktop.Views
 
         }
 
-        private void Refresh()
+        private void ClearForm()
         {
             txtSupplierName.Text = String.Empty;
             txtSupplierAddress.Text = String.Empty;

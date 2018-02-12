@@ -41,7 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Library\CollectionHelper.cs" />
+    <Compile Include="Library\Entity.cs" />
     <Compile Include="Library\ModelState.cs" />
+    <Compile Include="Library\PrimeService.cs" />
     <Compile Include="Library\RandomNumberGenerator.cs" />
     <Compile Include="Library\Session.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

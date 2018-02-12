@@ -19,4 +19,10 @@ namespace IMS.Data.Model
     {
 
     }
+
+    [MetadataType(typeof(ReceiveDetailMetadata))]
+    public partial class ReceiveDetail
+    {
+
+    }
 }

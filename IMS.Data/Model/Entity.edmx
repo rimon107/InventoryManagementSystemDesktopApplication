@@ -112,6 +112,14 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RoleName" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Address" Type="varchar" MaxLength="200" />
+        </EntityType>
         <EntityType Name="TransactionSource">
           <Key>
             <PropertyRef Name="Id" />
@@ -226,6 +234,7 @@
           <EntitySet Name="Receive" EntityType="Self.Receive" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReceiveDetail" EntityType="Self.ReceiveDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TransactionSource" EntityType="Self.TransactionSource" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserManager" EntityType="Self.UserManager" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="Fk_EditBy" Association="Self.Fk_EditBy">
@@ -299,6 +308,7 @@
             <End Role="UserManager" EntitySet="UserManagers" />
             <End Role="UserManager1" EntitySet="UserManagers" />
           </AssociationSet>
+          <EntitySet Name="Suppliers" EntityType="InventoryModel.Supplier" />
         </EntityContainer>
         <EntityType Name="Material">
           <Key>
@@ -527,6 +537,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -667,6 +685,15 @@
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Suppliers">
+            <EntityTypeMapping TypeName="InventoryModel.Supplier">
+              <MappingFragment StoreEntitySet="Supplier">
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

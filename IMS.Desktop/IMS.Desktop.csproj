@@ -78,6 +78,12 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\Common\MaterialSearchForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Common\MaterialSearchForm.Designer.cs">
+      <DependentUpon>MaterialSearchForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Common\SupplierSearchForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -95,6 +101,12 @@
     </Compile>
     <Compile Include="Views\Received\QuarantineReceiveForm.Designer.cs">
       <DependentUpon>QuarantineReceiveForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Received\QuarantineReceiveList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Received\QuarantineReceiveList.Designer.cs">
+      <DependentUpon>QuarantineReceiveList.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Received\TransactionSourceSearchForm.cs">
       <SubType>Form</SubType>
@@ -123,6 +135,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Views\Common\MaterialSearchForm.resx">
+      <DependentUpon>MaterialSearchForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Common\SupplierSearchForm.resx">
       <DependentUpon>SupplierSearchForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -131,6 +146,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Received\QuarantineReceiveForm.resx">
       <DependentUpon>QuarantineReceiveForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Received\QuarantineReceiveList.resx">
+      <DependentUpon>QuarantineReceiveList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Received\TransactionSourceSearchForm.resx">
       <DependentUpon>TransactionSourceSearchForm.cs</DependentUpon>

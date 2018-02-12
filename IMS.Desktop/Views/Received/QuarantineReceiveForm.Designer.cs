@@ -28,6 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.txtTransactionRefNo = new System.Windows.Forms.TextBox();
             this.btnTransactionRefSearch = new System.Windows.Forms.Button();
@@ -35,7 +38,7 @@
             this.dateTimeTransaction = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.txtSupplierId = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.txtSupplierName = new System.Windows.Forms.TextBox();
             this.btnSupplierFind = new System.Windows.Forms.Button();
@@ -59,6 +62,9 @@
             this.txtSupplierAddress = new System.Windows.Forms.TextBox();
             this.txtReceiveText = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
+            this.btnAddNewRow = new System.Windows.Forms.Button();
+            this.btnClear = new System.Windows.Forms.Button();
+            this.btnClearGrid = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gvReceiveDetail)).BeginInit();
             this.SuspendLayout();
             // 
@@ -93,12 +99,13 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(18, 65);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(89, 13);
+            this.label2.Size = new System.Drawing.Size(109, 13);
             this.label2.TabIndex = 3;
-            this.label2.Text = "Transaction Date";
+            this.label2.Text = "Transaction Ref Date";
             // 
             // dateTimeTransaction
             // 
+            this.dateTimeTransaction.Enabled = false;
             this.dateTimeTransaction.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimeTransaction.Location = new System.Drawing.Point(136, 63);
             this.dateTimeTransaction.Name = "dateTimeTransaction";
@@ -123,12 +130,13 @@
             this.label5.TabIndex = 10;
             this.label5.Text = "Supplier Name";
             // 
-            // textBox4
+            // txtSupplierId
             // 
-            this.textBox4.Location = new System.Drawing.Point(136, 87);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(133, 20);
-            this.textBox4.TabIndex = 9;
+            this.txtSupplierId.Enabled = false;
+            this.txtSupplierId.Location = new System.Drawing.Point(136, 87);
+            this.txtSupplierId.Name = "txtSupplierId";
+            this.txtSupplierId.Size = new System.Drawing.Size(133, 20);
+            this.txtSupplierId.TabIndex = 9;
             // 
             // label6
             // 
@@ -141,6 +149,7 @@
             // 
             // txtSupplierName
             // 
+            this.txtSupplierName.Enabled = false;
             this.txtSupplierName.Location = new System.Drawing.Point(136, 111);
             this.txtSupplierName.Name = "txtSupplierName";
             this.txtSupplierName.Size = new System.Drawing.Size(165, 20);
@@ -194,6 +203,7 @@
             // 
             // dateTimeGRN
             // 
+            this.dateTimeGRN.Enabled = false;
             this.dateTimeGRN.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimeGRN.Location = new System.Drawing.Point(757, 48);
             this.dateTimeGRN.Name = "dateTimeGRN";
@@ -202,6 +212,7 @@
             // 
             // cmbPlantInfo
             // 
+            this.cmbPlantInfo.Enabled = false;
             this.cmbPlantInfo.FormattingEnabled = true;
             this.cmbPlantInfo.Location = new System.Drawing.Point(136, 14);
             this.cmbPlantInfo.Name = "cmbPlantInfo";
@@ -246,6 +257,7 @@
             this.dateTimeVATChallan.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimeVATChallan.Location = new System.Drawing.Point(757, 145);
             this.dateTimeVATChallan.Name = "dateTimeVATChallan";
+            this.dateTimeVATChallan.ShowCheckBox = true;
             this.dateTimeVATChallan.Size = new System.Drawing.Size(170, 20);
             this.dateTimeVATChallan.TabIndex = 53;
             // 
@@ -277,9 +289,33 @@
             // gvReceiveDetail
             // 
             this.gvReceiveDetail.AllowUserToAddRows = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvReceiveDetail.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.gvReceiveDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gvReceiveDetail.DefaultCellStyle = dataGridViewCellStyle2;
             this.gvReceiveDetail.Location = new System.Drawing.Point(28, 222);
             this.gvReceiveDetail.Name = "gvReceiveDetail";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvReceiveDetail.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.gvReceiveDetail.Size = new System.Drawing.Size(1093, 295);
             this.gvReceiveDetail.TabIndex = 54;
             // 
@@ -305,6 +341,7 @@
             // 
             // txtSupplierAddress
             // 
+            this.txtSupplierAddress.Enabled = false;
             this.txtSupplierAddress.Location = new System.Drawing.Point(136, 135);
             this.txtSupplierAddress.Multiline = true;
             this.txtSupplierAddress.Name = "txtSupplierAddress";
@@ -328,11 +365,44 @@
             this.label14.TabIndex = 57;
             this.label14.Text = "Receive Text/ Comments";
             // 
+            // btnAddNewRow
+            // 
+            this.btnAddNewRow.Location = new System.Drawing.Point(952, 193);
+            this.btnAddNewRow.Name = "btnAddNewRow";
+            this.btnAddNewRow.Size = new System.Drawing.Size(83, 23);
+            this.btnAddNewRow.TabIndex = 59;
+            this.btnAddNewRow.Text = "Add New Row";
+            this.btnAddNewRow.UseVisualStyleBackColor = true;
+            this.btnAddNewRow.Click += new System.EventHandler(this.btnAddNewRow_Click);
+            // 
+            // btnClear
+            // 
+            this.btnClear.Location = new System.Drawing.Point(952, 92);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(169, 23);
+            this.btnClear.TabIndex = 60;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
+            // btnClearGrid
+            // 
+            this.btnClearGrid.Location = new System.Drawing.Point(1041, 193);
+            this.btnClearGrid.Name = "btnClearGrid";
+            this.btnClearGrid.Size = new System.Drawing.Size(80, 23);
+            this.btnClearGrid.TabIndex = 61;
+            this.btnClearGrid.Text = "Clear Table";
+            this.btnClearGrid.UseVisualStyleBackColor = true;
+            this.btnClearGrid.Click += new System.EventHandler(this.btnClearGrid_Click);
+            // 
             // QuarantineReceiveForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1142, 595);
+            this.Controls.Add(this.btnClearGrid);
+            this.Controls.Add(this.btnClear);
+            this.Controls.Add(this.btnAddNewRow);
             this.Controls.Add(this.txtReceiveText);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.btnClose);
@@ -357,7 +427,7 @@
             this.Controls.Add(this.txtSupplierAddress);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.txtSupplierId);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.dateTimeTransaction);
             this.Controls.Add(this.label2);
@@ -382,7 +452,7 @@
         private System.Windows.Forms.DateTimePicker dateTimeTransaction;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox txtSupplierId;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtSupplierName;
         private System.Windows.Forms.Button btnSupplierFind;
@@ -406,5 +476,8 @@
         private System.Windows.Forms.TextBox txtSupplierAddress;
         private System.Windows.Forms.TextBox txtReceiveText;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Button btnAddNewRow;
+        private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.Button btnClearGrid;
     }
 }

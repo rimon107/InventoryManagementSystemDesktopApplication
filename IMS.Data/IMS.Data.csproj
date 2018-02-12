@@ -93,6 +93,9 @@
     <Compile Include="Model\Role.cs">
       <DependentUpon>Entity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Supplier.cs">
+      <DependentUpon>Entity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\TransactionSource.cs">
       <DependentUpon>Entity.tt</DependentUpon>
     </Compile>
