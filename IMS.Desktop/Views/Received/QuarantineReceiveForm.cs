@@ -29,25 +29,7 @@ namespace IMS.Desktop.Views.Received
         public QuarantineReceiveForm()
         {
             InitializeComponent();
-
-            //var container = new UnityContainer();
-
-            //container.RegisterType<IContext<PlantInfo>, Context<PlantInfo>>("PlantInfo");
-            //container.RegisterType<GenericContext<PlantInfo>>("Plant",
-            //    new InjectionConstructor(container.Resolve<IContext<PlantInfo>>("PlantInfo")));
-
-            //container.RegisterType<IContext<Receive>, Context<Receive>>("ReceiveInfo");
-            //container.RegisterType<GenericContext<Receive>>("Receive",
-            //    new InjectionConstructor(container.Resolve<IContext<Receive>>("ReceiveInfo")));
-
-            //container.RegisterType<IContext<ReceiveDetail>, Context<ReceiveDetail>>("ReceiveDetailInfo");
-            //container.RegisterType<GenericContext<ReceiveDetail>>("ReceiveDetail",
-            //    new InjectionConstructor(container.Resolve<IContext<ReceiveDetail>>("ReceiveDetailInfo")));
-
-            //_PlantContext = container.Resolve<GenericContext<PlantInfo>>("Plant");
-            //_ReceiveContext = container.Resolve<GenericContext<Receive>>("Receive");
-            //_ReceiveDetailContext = container.Resolve<GenericContext<ReceiveDetail>>("ReceiveDetail");
-
+            
             _PlantContext = ServiceLocator.Current.GetInstance<GenericContext<PlantInfo>>();
             _ReceiveContext = ServiceLocator.Current.GetInstance<GenericContext<Receive>>();
             _ReceiveDetailContext = ServiceLocator.Current.GetInstance<GenericContext<ReceiveDetail>>();
@@ -61,27 +43,26 @@ namespace IMS.Desktop.Views.Received
             cmbPlantInfo.ValueMember = "PlantID";
             cmbPlantInfo.DisplayMember = "PlantName";
 
-            //_ReceiveDetailContext.SetEntityList();
+            DataGridViewButtonColumn columnDel = new DataGridViewButtonColumn();
+            columnDel.Name = "Delete";
+            columnDel.HeaderText = "Delete";
+            columnDel.Text = "Del";
+            columnDel.UseColumnTextForButtonValue = true;
+
+            //if (!gvReceiveDetail.Columns.Contains(columnDel))
+            //{
+                gvReceiveDetail.Columns.Insert(0, columnDel);
+                gvReceiveDetail.AutoSize = true;
+                gvReceiveDetail.AllowUserToAddRows = false;
+                gvReceiveDetail.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                gvReceiveDetail.CellClick += new DataGridViewCellEventHandler(gvReceiveDetail_CellClick);
+            //}
+
             var data = _ReceiveDetailContext.EntityList;
-            //gvReceiveDetail.AutoGenerateColumns = false;
+           
             if (data.Count == 0)
             {
-                //BindingList<ReceiveDetail> clientDataSource;
-                //clientDataSource = new BindingList<ReceiveDetail>() { AllowNew = true };
-                //clientDataSource.Add(new ReceiveDetail());
-                //var source = new BindingSource(clientDataSource, null);
-                //gvReceiveDetail.DataSource = clientDataSource;
-                //gvReceiveDetail.AllowUserToAddRows = false;
-
-                //for (int i = 0; i < gvReceiveDetail.Columns.Count; i++)
-                //{
-                //    gvReceiveDetail.Columns[i].ReadOnly = true;
-                //}
-
                 InitializeDefaultReceiveDetail();
-
-
-
             }
             else
             {
@@ -795,20 +776,21 @@ namespace IMS.Desktop.Views.Received
                 gvReceiveDetail.Rows[0].Cells["MaterialCode"].Value = MatCode;
                 gvReceiveDetail.Rows[0].Cells["MaterialName"].Value = MatName;
                 gvReceiveDetail.Rows[0].Cells["MaterialUnit"].Value = MatUnit;
+                gvReceiveDetail.Rows[0].Cells["Delete"].Value = "Del";
 
-                DataGridViewButtonColumn columnDel = new DataGridViewButtonColumn();
-                columnDel.Name = "Delete";
-                columnDel.Text = "Del";
-                columnDel.UseColumnTextForButtonValue = true;
+                //DataGridViewButtonColumn columnDel = new DataGridViewButtonColumn();
+                //columnDel.Name = "Delete";
+                //columnDel.Text = "Del";
+                //columnDel.UseColumnTextForButtonValue = true;
 
-                if (!gvReceiveDetail.Columns.Contains(columnDel))
-                {
-                    gvReceiveDetail.Columns.Insert(0, columnDel);
-                    gvReceiveDetail.AutoSize = true;
-                    //gvReceiveDetail.AllowUserToAddRows = false;
-                    gvReceiveDetail.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                    gvReceiveDetail.CellClick += new DataGridViewCellEventHandler(gvReceiveDetail_CellClick);
-                }
+                //if (!gvReceiveDetail.Columns.Contains(columnDel))
+                //{
+                //    gvReceiveDetail.Columns.Insert(0, columnDel);
+                //    gvReceiveDetail.AutoSize = true;
+                //    //gvReceiveDetail.AllowUserToAddRows = false;
+                //    gvReceiveDetail.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                //    gvReceiveDetail.CellClick += new DataGridViewCellEventHandler(gvReceiveDetail_CellClick);
+                //}
             }
            
         }
@@ -821,7 +803,7 @@ namespace IMS.Desktop.Views.Received
 
             MatForm.ShowDialog();
 
-            AddNewMaterial();
+            //AddNewMaterial();
 
         }
 

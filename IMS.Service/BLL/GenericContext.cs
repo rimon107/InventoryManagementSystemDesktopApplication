@@ -12,7 +12,7 @@ namespace IMS.Service.BLL
        
         public GenericContext(IContext<T> context)
         {
-            EntityList = new BindingList<T>();
+            EntityList = new List<T>();
             this.context = context;
         }
 
@@ -34,25 +34,7 @@ namespace IMS.Service.BLL
             }
         }
 
-        //public T Create(T Entity)
-        //{
-
-
-        //    if (ModelState.IsValid<T>(Entity))
-        //    {
-        //        var entity = context.Create(Entity);
-
-        //        return entity;
-        //    }
-        //    else
-        //    {
-
-        //        return null;
-        //    }
-
-
-
-        //}
+        
 
         public T Create()
         {
