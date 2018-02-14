@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Library\CollectionHelper.cs" />
     <Compile Include="Library\Entity.cs" />
+    <Compile Include="Library\MessageEventArgs.cs" />
     <Compile Include="Library\ModelState.cs" />
     <Compile Include="Library\PrimeService.cs" />
     <Compile Include="Library\RandomNumberGenerator.cs" />

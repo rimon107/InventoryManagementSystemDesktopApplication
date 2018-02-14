@@ -1,5 +1,5 @@
 ﻿using IMS.Data.Model;
-using IMS.Data.DLL.IContext;
+using IMS.Data.DAL.IContext;
 
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using Common.Library;
 
 
-namespace IMS.Service.BAL
+namespace IMS.Service.BLL
 {
     public class UserContext
     {

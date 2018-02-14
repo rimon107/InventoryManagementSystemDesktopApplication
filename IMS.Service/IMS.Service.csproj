@@ -41,10 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BAL\GenericContext.cs" />
-    <Compile Include="BAL\SupplierContext.cs" />
-    <Compile Include="BAL\SupplierContextGeneric.cs" />
-    <Compile Include="BAL\UserContext.cs" />
+    <Compile Include="BLL\GenericContext.cs" />
+    <Compile Include="BLL\SupplierContext.cs" />
+    <Compile Include="BLL\SupplierContextGeneric.cs" />
+    <Compile Include="BLL\UserContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

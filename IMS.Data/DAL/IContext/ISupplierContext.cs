@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using IMS.Data.Model;
 
-namespace IMS.Service.DLL.IContext
+namespace IMS.Service.DAL.IContext
 {
     public interface ISupplierContext
     {

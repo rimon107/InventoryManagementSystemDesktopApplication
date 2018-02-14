@@ -1,6 +1,6 @@
 ﻿using IMS.Data.Model;
 
-namespace IMS.Data.DLL.IContext
+namespace IMS.Data.DAL.IContext
 {
     public interface IUserContext
     {

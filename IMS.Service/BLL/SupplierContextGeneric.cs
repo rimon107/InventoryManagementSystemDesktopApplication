@@ -1,5 +1,5 @@
 ﻿using Common.Library;
-using IMS.Data.DLL.IContext;
+using IMS.Data.DAL.IContext;
 using IMS.Data.Model;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IMS.Service.BAL
+namespace IMS.Service.BLL
 {
     public class SupplierContextGeneric
     {

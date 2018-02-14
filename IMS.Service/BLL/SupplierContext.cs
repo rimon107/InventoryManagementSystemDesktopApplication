@@ -1,14 +1,10 @@
 ﻿using IMS.Data.Model;
-using IMS.Service.DLL.IContext;
-using IMS.Data.DLL.Context;
+using IMS.Service.DAL.IContext;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Common.Library;
 
-namespace IMS.Service.BAL
+
+namespace IMS.Service.BLL
 {
     public class SupplierContext
     {

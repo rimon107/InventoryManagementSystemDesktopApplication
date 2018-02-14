@@ -1,9 +1,9 @@
 ﻿using Common.Library;
-using IMS.Data.DLL.Context;
-using IMS.Data.DLL.IContext;
+using IMS.Data.DAL.Context;
+using IMS.Data.DAL.IContext;
 using IMS.Data.Model;
-using IMS.Service.BAL;
-using IMS.Service.DLL.IContext;
+using IMS.Service.BLL;
+using IMS.Service.DAL.IContext;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

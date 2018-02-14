@@ -34,16 +34,17 @@
             this.btnMaterialFind = new System.Windows.Forms.Button();
             this.txtMaterialSearch = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnInsert = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gvMaterial)).BeginInit();
             this.SuspendLayout();
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(490, 463);
+            this.btnOk.Location = new System.Drawing.Point(479, 463);
             this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(75, 23);
+            this.btnOk.Size = new System.Drawing.Size(86, 23);
             this.btnOk.TabIndex = 23;
-            this.btnOk.Text = "Ok";
+            this.btnOk.Text = "Insert and Exit";
             this.btnOk.UseVisualStyleBackColor = true;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
@@ -91,11 +92,22 @@
             this.label1.TabIndex = 18;
             this.label1.Text = "Find";
             // 
+            // btnInsert
+            // 
+            this.btnInsert.Location = new System.Drawing.Point(398, 463);
+            this.btnInsert.Name = "btnInsert";
+            this.btnInsert.Size = new System.Drawing.Size(75, 23);
+            this.btnInsert.TabIndex = 24;
+            this.btnInsert.Text = "Insert";
+            this.btnInsert.UseVisualStyleBackColor = true;
+            this.btnInsert.Click += new System.EventHandler(this.btnInsert_Click);
+            // 
             // MaterialSearchForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(669, 507);
+            this.Controls.Add(this.btnInsert);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.gvMaterial);
@@ -104,7 +116,7 @@
             this.Controls.Add(this.label1);
             this.Name = "MaterialSearchForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "MaterialSearchForm";
+            this.Text = "Material Search Form";
             ((System.ComponentModel.ISupportInitialize)(this.gvMaterial)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -119,5 +131,6 @@
         private System.Windows.Forms.Button btnMaterialFind;
         private System.Windows.Forms.TextBox txtMaterialSearch;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnInsert;
     }
 }

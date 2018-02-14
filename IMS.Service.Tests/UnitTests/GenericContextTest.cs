@@ -1,10 +1,10 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using IMS.Data.DLL.IContext;
+using IMS.Data.DAL.IContext;
 using IMS.Data.Model;
 using System.Collections.Generic;
-using IMS.Service.BAL;
+using IMS.Service.BLL;
 using System.ComponentModel;
 
 namespace IMS.Service.Tests.UnitTests
@@ -26,7 +26,7 @@ namespace IMS.Service.Tests.UnitTests
             store = new List<Receive>();
 
             mock = new Mock<IContext<Receive>>();
-            mock.Setup(m => m.GetAllEntity()).Returns(store);
+            mock.Setup(m => m.GetAll()).Returns(store);
             mock.Setup(m => m.Create(It.IsAny<Receive>())).Callback<Receive>(receive => store.Add(receive));
             mock.Setup(m => m.Delete(It.IsAny<Receive>())).Callback<Receive>(receive => store.Remove(receive));
             mock.Setup(m => m.Update(It.IsAny<Receive>())).Callback<Receive>(receive =>

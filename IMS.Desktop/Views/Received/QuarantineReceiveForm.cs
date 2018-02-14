@@ -1,9 +1,10 @@
 ﻿using Common.Library;
-using IMS.Data.DLL.Context;
-using IMS.Data.DLL.IContext;
+using CommonServiceLocator;
+using IMS.Data.DAL.Context;
+using IMS.Data.DAL.IContext;
 using IMS.Data.Model;
 using IMS.Desktop.Views.Common;
-using IMS.Service.BAL;
+using IMS.Service.BLL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -29,30 +30,34 @@ namespace IMS.Desktop.Views.Received
         {
             InitializeComponent();
 
-            var container = new UnityContainer();
+            //var container = new UnityContainer();
 
-            container.RegisterType<IContext<PlantInfo>, Context<PlantInfo>>("PlantInfo");
-            container.RegisterType<GenericContext<PlantInfo>>("Plant",
-                new InjectionConstructor(container.Resolve<IContext<PlantInfo>>("PlantInfo")));
+            //container.RegisterType<IContext<PlantInfo>, Context<PlantInfo>>("PlantInfo");
+            //container.RegisterType<GenericContext<PlantInfo>>("Plant",
+            //    new InjectionConstructor(container.Resolve<IContext<PlantInfo>>("PlantInfo")));
 
-            container.RegisterType<IContext<Receive>, Context<Receive>>("ReceiveInfo");
-            container.RegisterType<GenericContext<Receive>>("Receive",
-                new InjectionConstructor(container.Resolve<IContext<Receive>>("ReceiveInfo")));
+            //container.RegisterType<IContext<Receive>, Context<Receive>>("ReceiveInfo");
+            //container.RegisterType<GenericContext<Receive>>("Receive",
+            //    new InjectionConstructor(container.Resolve<IContext<Receive>>("ReceiveInfo")));
 
-            container.RegisterType<IContext<ReceiveDetail>, Context<ReceiveDetail>>("ReceiveDetailInfo");
-            container.RegisterType<GenericContext<ReceiveDetail>>("ReceiveDetail",
-                new InjectionConstructor(container.Resolve<IContext<ReceiveDetail>>("ReceiveDetailInfo")));
+            //container.RegisterType<IContext<ReceiveDetail>, Context<ReceiveDetail>>("ReceiveDetailInfo");
+            //container.RegisterType<GenericContext<ReceiveDetail>>("ReceiveDetail",
+            //    new InjectionConstructor(container.Resolve<IContext<ReceiveDetail>>("ReceiveDetailInfo")));
 
-            _PlantContext = container.Resolve<GenericContext<PlantInfo>>("Plant");
-            _ReceiveContext = container.Resolve<GenericContext<Receive>>("Receive");
-            _ReceiveDetailContext = container.Resolve<GenericContext<ReceiveDetail>>("ReceiveDetail");
+            //_PlantContext = container.Resolve<GenericContext<PlantInfo>>("Plant");
+            //_ReceiveContext = container.Resolve<GenericContext<Receive>>("Receive");
+            //_ReceiveDetailContext = container.Resolve<GenericContext<ReceiveDetail>>("ReceiveDetail");
+
+            _PlantContext = ServiceLocator.Current.GetInstance<GenericContext<PlantInfo>>();
+            _ReceiveContext = ServiceLocator.Current.GetInstance<GenericContext<Receive>>();
+            _ReceiveDetailContext = ServiceLocator.Current.GetInstance<GenericContext<ReceiveDetail>>();
 
             LoadData();
         }
 
         private void LoadData()
         {
-            cmbPlantInfo.DataSource = _PlantContext.GetAllEntity();
+            cmbPlantInfo.DataSource = _PlantContext.GetAll();
             cmbPlantInfo.ValueMember = "PlantID";
             cmbPlantInfo.DisplayMember = "PlantName";
 
@@ -362,41 +367,301 @@ namespace IMS.Desktop.Views.Received
 
         }
 
-        private void btnAddNewRow_Click(object sender, EventArgs e)
+        private void AddNewMaterial()
         {
-            new MaterialSearchForm().ShowDialog();
 
-            if (Entity<Material>.entity == null)
+            if (Entity<Material>.check)
             {
-                MessageBox.Show("Select Material Code");
-            }
-            else
-            {
-                var MatCode = Entity<Material>.entity.MaterialCode;
-                var MatName = Entity<Material>.entity.MaterialName;
-                var MatUnit = Entity<Material>.entity.Unit;
-
-                Entity<Material>.entity = null;
-                bool flag = false;
-
-                int index;
-
-                try
+                if (Entity<Material>.entity == null)
                 {
-                    index = gvReceiveDetail.Rows.Count;
+                    MessageBox.Show("Select Material Code");
                 }
-                catch
+                else
                 {
-                    index = 0;
-                }
+                    var MatCode = Entity<Material>.entity.MaterialCode;
+                    var MatName = Entity<Material>.entity.MaterialName;
+                    var MatUnit = Entity<Material>.entity.Unit;
 
-                if (index > 0)
-                {
+                    Entity<Material>.entity = null;
+                    bool flag = false;
+
+                    int index;
+
+                    try
+                    {
+                        index = gvReceiveDetail.Rows.Count;
+                    }
+                    catch
+                    {
+                        index = 0;
+                    }
+
+                    if (index > 0)
+                    {
 
 
-                    if (gvReceiveDetail.Rows[index - 1].Cells["MaterialCode"].Value == null ||
-                        String.IsNullOrWhiteSpace(gvReceiveDetail.Rows[index - 1].Cells["MaterialCode"].Value.ToString())
-                        )
+                        if (gvReceiveDetail.Rows[index - 1].Cells["MaterialCode"].Value == null ||
+                            String.IsNullOrWhiteSpace(gvReceiveDetail.Rows[index - 1].Cells["MaterialCode"].Value.ToString())
+                            )
+                        {
+                            InitializeDefaultReceiveDetail();
+                            gvReceiveDetail.AllowUserToAddRows = true;
+
+                            gvReceiveDetail.Rows[0].Cells["MaterialCode"].Value = MatCode;
+                            gvReceiveDetail.Rows[0].Cells["MaterialName"].Value = MatName;
+                            gvReceiveDetail.Rows[0].Cells["MaterialUnit"].Value = MatUnit;
+                        }
+
+                        else
+                        {
+                            DataTable dt = DataTableReceiveDetail();
+                            foreach (DataGridViewRow row in gvReceiveDetail.Rows)
+                            {
+                                if (row.Cells["MaterialCode"].Value.ToString() == MatCode)
+                                {
+                                    flag = true;
+                                    break;
+                                }
+
+                                #region Using DataTable
+
+                                DataRow dr = dt.NewRow();
+
+                                dr["MaterialCode"] = row.Cells["MaterialCode"].Value.ToString();
+                                dr["MaterialName"] = row.Cells["MaterialName"].Value.ToString();
+                                dr["MaterialUnit"] = row.Cells["MaterialUnit"].Value.ToString();
+                                //dr[3] = row.Cells["OrderQuantity"].Value.ToString();
+                                //dr[4] = row.Cells["ChallanQuantity"].Value.ToString();
+                                //dr[5] = row.Cells["EarlierReceivedQuantity"].Value.ToString();
+                                //dr[6] = row.Cells["ReceivedQuantity"].Value.ToString();
+                                //dr[7] = row.Cells["DetailUnit"].Value.ToString();
+                                //dr[8] = row.Cells["DetailQuantity"].Value.ToString();
+                                //dr[9] = row.Cells["BatchNo"].Value.ToString();
+                                //dr[10] = row.Cells["ManufacturerLotNo"].Value.ToString();
+                                //dr[11] = row.Cells["LotQuantity"].Value.ToString();
+                                //dr[12] = row.Cells["NoOfPack"].Value.ToString();
+
+                                dt.Rows.Add(dr);
+                                #endregion
+
+                            }
+
+                            if (!flag)
+                            {
+                                DataRow drn = dt.NewRow();
+
+                                drn["MaterialCode"] = MatCode;
+                                drn["MaterialName"] = MatName;
+                                drn["MaterialUnit"] = MatUnit;
+                                //dr[3] = row.Cells["OrderQuantity"].Value.ToString();
+                                //dr[4] = row.Cells["ChallanQuantity"].Value.ToString();
+                                //dr[5] = row.Cells["EarlierReceivedQuantity"].Value.ToString();
+                                //dr[6] = row.Cells["ReceivedQuantity"].Value.ToString();
+                                //dr[7] = row.Cells["DetailUnit"].Value.ToString();
+                                //dr[8] = row.Cells["DetailQuantity"].Value.ToString();
+                                //dr[9] = row.Cells["BatchNo"].Value.ToString();
+                                //dr[10] = row.Cells["ManufacturerLotNo"].Value.ToString();
+                                //dr[11] = row.Cells["LotQuantity"].Value.ToString();
+                                //dr[12] = row.Cells["NoOfPack"].Value.ToString();
+
+                                dt.Rows.Add(drn);
+
+                                gvReceiveDetail.DataSource = dt;
+                                gvReceiveDetail.AllowUserToAddRows = false;
+                            }
+                        }
+
+
+                        #region prev
+                        //if (int.Parse(gvReceiveDetail.Rows[index - 1].Cells["Id"].Value.ToString()) != 0)
+                        //{
+                        //    var data = _ReceiveDetailContext.EntityList;
+
+                        //    var recDetail = new ReceiveDetail();
+                        //    recDetail.MaterialCode = MatCode;
+
+                        //    data.Add(recDetail);
+                        //    gvReceiveDetail.DataSource = null;
+                        //    gvReceiveDetail.DataSource = data;
+                        //    //gvReceiveDetail.Refresh();
+                        //}
+                        //else
+                        //{
+                        //    if (gvReceiveDetail.Rows[index - 1].Cells["MaterialCode"].Value != null)
+                        //    {
+                        //        if (!String.IsNullOrWhiteSpace(gvReceiveDetail.Rows[index - 1].Cells["MaterialCode"].Value.ToString()))
+                        //        {
+                        //            var DataList = new BindingList<ReceiveDetail>();
+
+                        //            DataTable dt = DataTableReceiveDetail();
+                        //            foreach (DataGridViewRow row in gvReceiveDetail.Rows)
+                        //            {
+
+                        //                #region using model
+                        //                //var recDetail = new ReceiveDetail();
+                        //                //recDetail.Receive = null;
+
+                        //                //recDetail.MaterialCode = row.Cells["MaterialCode"].Value.ToString();
+                        //                //try
+                        //                //{
+                        //                //    recDetail.OrderQuantity = Decimal.Parse(row.Cells["OrderQuantity"].Value.ToString());
+                        //                //}
+                        //                //catch
+                        //                //{
+                        //                //    recDetail.OrderQuantity = 0;
+                        //                //}
+                        //                //try
+                        //                //{
+                        //                //    recDetail.ChallanQuantity = Decimal.Parse(row.Cells["ChallanQuantity"].Value.ToString());
+                        //                //}
+                        //                //catch
+                        //                //{
+                        //                //    recDetail.ChallanQuantity = 0;
+                        //                //}
+                        //                //try
+                        //                //{
+                        //                //    recDetail.ReceivedQuantity = Decimal.Parse(row.Cells["ReceivedQuantity"].Value.ToString());
+                        //                //}
+                        //                //catch
+                        //                //{
+                        //                //    recDetail.ReceivedQuantity = 0;
+                        //                //}
+                        //                //try
+                        //                //{
+                        //                //    recDetail.DetailQuantity = Decimal.Parse(row.Cells["DetailQuantity"].Value.ToString());
+                        //                //}
+                        //                //catch
+                        //                //{
+                        //                //    recDetail.DetailQuantity = 0;
+                        //                //}
+                        //                //try
+                        //                //{
+                        //                //    recDetail.UnitPrice = Decimal.Parse(row.Cells["UnitPrice"].Value.ToString());
+                        //                //}
+                        //                //catch
+                        //                //{
+                        //                //    recDetail.UnitPrice = 0;
+                        //                //}
+                        //                //try
+                        //                //{
+                        //                //    recDetail.VatPercent = Decimal.Parse(row.Cells["VatPercent"].Value.ToString());
+                        //                //}
+                        //                //catch
+                        //                //{
+                        //                //    recDetail.VatPercent = 0;
+                        //                //}
+                        //                //try
+                        //                //{
+                        //                //    recDetail.VatAmount = Decimal.Parse(row.Cells["VatAmount"].Value.ToString());
+                        //                //}
+                        //                //catch
+                        //                //{
+                        //                //    recDetail.VatAmount = 0;
+                        //                //}
+                        //                //try
+                        //                //{
+                        //                //    recDetail.BatchNo = row.Cells["BatchNo"].Value.ToString();
+                        //                //}
+                        //                //catch
+                        //                //{
+                        //                //    recDetail.BatchNo = String.Empty;
+                        //                //}
+                        //                //try
+                        //                //{
+                        //                //    recDetail.ManufacturerId = row.Cells["ManufacturerId"].Value.ToString();
+                        //                //}
+                        //                //catch
+                        //                //{
+                        //                //    recDetail.ManufacturerId = String.Empty;
+                        //                //}
+                        //                //try
+                        //                //{
+                        //                //    recDetail.ManufacturerLotNo = row.Cells["ManufacturerLotNo"].Value.ToString();
+                        //                //}
+                        //                //catch
+                        //                //{
+                        //                //    recDetail.ManufacturerLotNo = String.Empty;
+                        //                //}
+                        //                //try
+                        //                //{
+                        //                //    recDetail.LotQuantity = Decimal.Parse(row.Cells["LotQuantity"].Value.ToString());
+                        //                //}
+                        //                //catch
+                        //                //{
+                        //                //    recDetail.LotQuantity = 0;
+                        //                //}
+                        //                //try
+                        //                //{
+                        //                //    recDetail.NoOfPack = Int32.Parse(row.Cells["NoOfPack"].Value.ToString());
+                        //                //}
+                        //                //catch
+                        //                //{
+                        //                //    recDetail.NoOfPack = 0;
+                        //                //}
+
+                        //                //DataList.Add(recDetail);
+
+                        //                #endregion
+
+                        //                #region Using DataTable
+
+                        //                DataRow dr = dt.NewRow();
+
+                        //                dr[0] = row.Cells["MaterialCode"].Value.ToString();
+                        //                dr[1] = row.Cells["MaterialName"].Value.ToString();
+                        //                dr[2] = row.Cells["MaterialUnit"].Value.ToString();
+                        //                dr[3] = row.Cells["OrderQuantity"].Value.ToString();
+                        //                dr[4] = row.Cells["ChallanQuantity"].Value.ToString();
+                        //                dr[5] = row.Cells["EarlierReceivedQuantity"].Value.ToString();
+                        //                dr[6] = row.Cells["ReceivedQuantity"].Value.ToString();
+                        //                dr[7] = row.Cells["DetailUnit"].Value.ToString();
+                        //                dr[8] = row.Cells["DetailQuantity"].Value.ToString();
+                        //                dr[9] = row.Cells["BatchNo"].Value.ToString();
+                        //                dr[10] = row.Cells["ManufacturerLotNo"].Value.ToString();
+                        //                dr[11] = row.Cells["LotQuantity"].Value.ToString();
+                        //                dr[12] = row.Cells["NoOfPack"].Value.ToString();
+
+                        //                dt.Rows.Add(dr);
+                        //                #endregion
+
+                        //            }
+
+                        //            DataRow drn = dt.NewRow();
+
+                        //            dt.Rows.Add(drn);
+
+                        //            //var newRecDetail = new ReceiveDetail();
+
+                        //            //newRecDetail.MaterialCode = MatCode;
+
+                        //            //DataList.Add(newRecDetail);
+                        //            //gvReceiveDetail.DataSource = null;
+                        //            //gvReceiveDetail.DataSource = DataList;
+
+                        //            //gvReceiveDetail.Columns["Id"].Visible = false;
+                        //            //gvReceiveDetail.Columns["ReceiveId"].Visible = false;
+                        //            //gvReceiveDetail.Columns["IsQCReleased"].Visible = false;
+                        //            //gvReceiveDetail.Columns["RestrictedQuantity"].Visible = false;
+                        //            //gvReceiveDetail.Columns["Receive"].Visible = false;
+                        //        }
+                        //    }
+                        //    else
+                        //    {
+                        //        BindingList<ReceiveDetail> clientDataSource;
+                        //        clientDataSource = new BindingList<ReceiveDetail>() { AllowNew = true };
+                        //        var newRecDetail = new ReceiveDetail();
+
+                        //        newRecDetail.MaterialCode = MatCode;
+
+                        //        clientDataSource.Add(newRecDetail);
+                        //        var source = new BindingSource(clientDataSource, null);
+                        //        gvReceiveDetail.DataSource = clientDataSource;
+                        //        gvReceiveDetail.AllowUserToAddRows = false;
+                        //    }
+                        //}
+                        #endregion
+                    }
+                    else
                     {
                         InitializeDefaultReceiveDetail();
                         gvReceiveDetail.AllowUserToAddRows = true;
@@ -404,258 +669,55 @@ namespace IMS.Desktop.Views.Received
                         gvReceiveDetail.Rows[0].Cells["MaterialCode"].Value = MatCode;
                         gvReceiveDetail.Rows[0].Cells["MaterialName"].Value = MatName;
                         gvReceiveDetail.Rows[0].Cells["MaterialUnit"].Value = MatUnit;
-                    }
-                    
-                    else
-                    {
-                        DataTable dt = DataTableReceiveDetail();
-                        foreach (DataGridViewRow row in gvReceiveDetail.Rows)
+
+                        DataGridViewButtonColumn columnDel = new DataGridViewButtonColumn();
+                        columnDel.Name = "Delete";
+                        columnDel.Text = "Del";
+                        columnDel.UseColumnTextForButtonValue = true;
+
+                        if (!gvReceiveDetail.Columns.Contains(columnDel))
                         {
-                            if(row.Cells["MaterialCode"].Value.ToString() == MatCode)
-                            {
-                                flag = true;
-                                break;
-                            }
-
-                            #region Using DataTable
-
-                            DataRow dr = dt.NewRow();
-
-                            dr["MaterialCode"] = row.Cells["MaterialCode"].Value.ToString();
-                            dr["MaterialName"] = row.Cells["MaterialName"].Value.ToString();
-                            dr["MaterialUnit"] = row.Cells["MaterialUnit"].Value.ToString();
-                            //dr[3] = row.Cells["OrderQuantity"].Value.ToString();
-                            //dr[4] = row.Cells["ChallanQuantity"].Value.ToString();
-                            //dr[5] = row.Cells["EarlierReceivedQuantity"].Value.ToString();
-                            //dr[6] = row.Cells["ReceivedQuantity"].Value.ToString();
-                            //dr[7] = row.Cells["DetailUnit"].Value.ToString();
-                            //dr[8] = row.Cells["DetailQuantity"].Value.ToString();
-                            //dr[9] = row.Cells["BatchNo"].Value.ToString();
-                            //dr[10] = row.Cells["ManufacturerLotNo"].Value.ToString();
-                            //dr[11] = row.Cells["LotQuantity"].Value.ToString();
-                            //dr[12] = row.Cells["NoOfPack"].Value.ToString();
-
-                            dt.Rows.Add(dr);
-                            #endregion
-
-                        }
-
-                        if (!flag)
-                        {
-                            DataRow drn = dt.NewRow();
-
-                            drn["MaterialCode"] = MatCode;
-                            drn["MaterialName"] = MatName;
-                            drn["MaterialUnit"] = MatUnit;
-                            //dr[3] = row.Cells["OrderQuantity"].Value.ToString();
-                            //dr[4] = row.Cells["ChallanQuantity"].Value.ToString();
-                            //dr[5] = row.Cells["EarlierReceivedQuantity"].Value.ToString();
-                            //dr[6] = row.Cells["ReceivedQuantity"].Value.ToString();
-                            //dr[7] = row.Cells["DetailUnit"].Value.ToString();
-                            //dr[8] = row.Cells["DetailQuantity"].Value.ToString();
-                            //dr[9] = row.Cells["BatchNo"].Value.ToString();
-                            //dr[10] = row.Cells["ManufacturerLotNo"].Value.ToString();
-                            //dr[11] = row.Cells["LotQuantity"].Value.ToString();
-                            //dr[12] = row.Cells["NoOfPack"].Value.ToString();
-
-                            dt.Rows.Add(drn);
-
-                            gvReceiveDetail.DataSource = dt;
-                            gvReceiveDetail.AllowUserToAddRows = false;
+                            gvReceiveDetail.Columns.Insert(0, columnDel);
+                            gvReceiveDetail.AutoSize = true;
+                            //gvReceiveDetail.AllowUserToAddRows = false;
+                            gvReceiveDetail.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                            gvReceiveDetail.CellClick += new DataGridViewCellEventHandler(gvReceiveDetail_CellClick);
                         }
                     }
-                   
-
-                    #region prev
-                    //if (int.Parse(gvReceiveDetail.Rows[index - 1].Cells["Id"].Value.ToString()) != 0)
-                    //{
-                    //    var data = _ReceiveDetailContext.EntityList;
-
-                    //    var recDetail = new ReceiveDetail();
-                    //    recDetail.MaterialCode = MatCode;
-
-                    //    data.Add(recDetail);
-                    //    gvReceiveDetail.DataSource = null;
-                    //    gvReceiveDetail.DataSource = data;
-                    //    //gvReceiveDetail.Refresh();
-                    //}
-                    //else
-                    //{
-                    //    if (gvReceiveDetail.Rows[index - 1].Cells["MaterialCode"].Value != null)
-                    //    {
-                    //        if (!String.IsNullOrWhiteSpace(gvReceiveDetail.Rows[index - 1].Cells["MaterialCode"].Value.ToString()))
-                    //        {
-                    //            var DataList = new BindingList<ReceiveDetail>();
-
-                    //            DataTable dt = DataTableReceiveDetail();
-                    //            foreach (DataGridViewRow row in gvReceiveDetail.Rows)
-                    //            {
-
-                    //                #region using model
-                    //                //var recDetail = new ReceiveDetail();
-                    //                //recDetail.Receive = null;
-
-                    //                //recDetail.MaterialCode = row.Cells["MaterialCode"].Value.ToString();
-                    //                //try
-                    //                //{
-                    //                //    recDetail.OrderQuantity = Decimal.Parse(row.Cells["OrderQuantity"].Value.ToString());
-                    //                //}
-                    //                //catch
-                    //                //{
-                    //                //    recDetail.OrderQuantity = 0;
-                    //                //}
-                    //                //try
-                    //                //{
-                    //                //    recDetail.ChallanQuantity = Decimal.Parse(row.Cells["ChallanQuantity"].Value.ToString());
-                    //                //}
-                    //                //catch
-                    //                //{
-                    //                //    recDetail.ChallanQuantity = 0;
-                    //                //}
-                    //                //try
-                    //                //{
-                    //                //    recDetail.ReceivedQuantity = Decimal.Parse(row.Cells["ReceivedQuantity"].Value.ToString());
-                    //                //}
-                    //                //catch
-                    //                //{
-                    //                //    recDetail.ReceivedQuantity = 0;
-                    //                //}
-                    //                //try
-                    //                //{
-                    //                //    recDetail.DetailQuantity = Decimal.Parse(row.Cells["DetailQuantity"].Value.ToString());
-                    //                //}
-                    //                //catch
-                    //                //{
-                    //                //    recDetail.DetailQuantity = 0;
-                    //                //}
-                    //                //try
-                    //                //{
-                    //                //    recDetail.UnitPrice = Decimal.Parse(row.Cells["UnitPrice"].Value.ToString());
-                    //                //}
-                    //                //catch
-                    //                //{
-                    //                //    recDetail.UnitPrice = 0;
-                    //                //}
-                    //                //try
-                    //                //{
-                    //                //    recDetail.VatPercent = Decimal.Parse(row.Cells["VatPercent"].Value.ToString());
-                    //                //}
-                    //                //catch
-                    //                //{
-                    //                //    recDetail.VatPercent = 0;
-                    //                //}
-                    //                //try
-                    //                //{
-                    //                //    recDetail.VatAmount = Decimal.Parse(row.Cells["VatAmount"].Value.ToString());
-                    //                //}
-                    //                //catch
-                    //                //{
-                    //                //    recDetail.VatAmount = 0;
-                    //                //}
-                    //                //try
-                    //                //{
-                    //                //    recDetail.BatchNo = row.Cells["BatchNo"].Value.ToString();
-                    //                //}
-                    //                //catch
-                    //                //{
-                    //                //    recDetail.BatchNo = String.Empty;
-                    //                //}
-                    //                //try
-                    //                //{
-                    //                //    recDetail.ManufacturerId = row.Cells["ManufacturerId"].Value.ToString();
-                    //                //}
-                    //                //catch
-                    //                //{
-                    //                //    recDetail.ManufacturerId = String.Empty;
-                    //                //}
-                    //                //try
-                    //                //{
-                    //                //    recDetail.ManufacturerLotNo = row.Cells["ManufacturerLotNo"].Value.ToString();
-                    //                //}
-                    //                //catch
-                    //                //{
-                    //                //    recDetail.ManufacturerLotNo = String.Empty;
-                    //                //}
-                    //                //try
-                    //                //{
-                    //                //    recDetail.LotQuantity = Decimal.Parse(row.Cells["LotQuantity"].Value.ToString());
-                    //                //}
-                    //                //catch
-                    //                //{
-                    //                //    recDetail.LotQuantity = 0;
-                    //                //}
-                    //                //try
-                    //                //{
-                    //                //    recDetail.NoOfPack = Int32.Parse(row.Cells["NoOfPack"].Value.ToString());
-                    //                //}
-                    //                //catch
-                    //                //{
-                    //                //    recDetail.NoOfPack = 0;
-                    //                //}
-
-                    //                //DataList.Add(recDetail);
-
-                    //                #endregion
-
-                    //                #region Using DataTable
-
-                    //                DataRow dr = dt.NewRow();
-
-                    //                dr[0] = row.Cells["MaterialCode"].Value.ToString();
-                    //                dr[1] = row.Cells["MaterialName"].Value.ToString();
-                    //                dr[2] = row.Cells["MaterialUnit"].Value.ToString();
-                    //                dr[3] = row.Cells["OrderQuantity"].Value.ToString();
-                    //                dr[4] = row.Cells["ChallanQuantity"].Value.ToString();
-                    //                dr[5] = row.Cells["EarlierReceivedQuantity"].Value.ToString();
-                    //                dr[6] = row.Cells["ReceivedQuantity"].Value.ToString();
-                    //                dr[7] = row.Cells["DetailUnit"].Value.ToString();
-                    //                dr[8] = row.Cells["DetailQuantity"].Value.ToString();
-                    //                dr[9] = row.Cells["BatchNo"].Value.ToString();
-                    //                dr[10] = row.Cells["ManufacturerLotNo"].Value.ToString();
-                    //                dr[11] = row.Cells["LotQuantity"].Value.ToString();
-                    //                dr[12] = row.Cells["NoOfPack"].Value.ToString();
-
-                    //                dt.Rows.Add(dr);
-                    //                #endregion
-
-                    //            }
-
-                    //            DataRow drn = dt.NewRow();
-
-                    //            dt.Rows.Add(drn);
-
-                    //            //var newRecDetail = new ReceiveDetail();
-
-                    //            //newRecDetail.MaterialCode = MatCode;
-
-                    //            //DataList.Add(newRecDetail);
-                    //            //gvReceiveDetail.DataSource = null;
-                    //            //gvReceiveDetail.DataSource = DataList;
-
-                    //            //gvReceiveDetail.Columns["Id"].Visible = false;
-                    //            //gvReceiveDetail.Columns["ReceiveId"].Visible = false;
-                    //            //gvReceiveDetail.Columns["IsQCReleased"].Visible = false;
-                    //            //gvReceiveDetail.Columns["RestrictedQuantity"].Visible = false;
-                    //            //gvReceiveDetail.Columns["Receive"].Visible = false;
-                    //        }
-                    //    }
-                    //    else
-                    //    {
-                    //        BindingList<ReceiveDetail> clientDataSource;
-                    //        clientDataSource = new BindingList<ReceiveDetail>() { AllowNew = true };
-                    //        var newRecDetail = new ReceiveDetail();
-
-                    //        newRecDetail.MaterialCode = MatCode;
-
-                    //        clientDataSource.Add(newRecDetail);
-                    //        var source = new BindingSource(clientDataSource, null);
-                    //        gvReceiveDetail.DataSource = clientDataSource;
-                    //        gvReceiveDetail.AllowUserToAddRows = false;
-                    //    }
-                    //}
-#endregion
                 }
-                else
+
+            }
+
+
+
+        }
+
+        private void AddMaterial(Material material)
+        {
+            var MatCode = material.MaterialCode;
+            var MatName = material.MaterialName;
+            var MatUnit = material.Unit;
+            
+            bool flag = false;
+
+            int index;
+
+            try
+            {
+                index = gvReceiveDetail.Rows.Count;
+            }
+            catch
+            {
+                index = 0;
+            }
+
+            if (index > 0)
+            {
+
+
+                if (gvReceiveDetail.Rows[index - 1].Cells["MaterialCode"].Value == null ||
+                    String.IsNullOrWhiteSpace(gvReceiveDetail.Rows[index - 1].Cells["MaterialCode"].Value.ToString())
+                    )
                 {
                     InitializeDefaultReceiveDetail();
                     gvReceiveDetail.AllowUserToAddRows = true;
@@ -663,24 +725,103 @@ namespace IMS.Desktop.Views.Received
                     gvReceiveDetail.Rows[0].Cells["MaterialCode"].Value = MatCode;
                     gvReceiveDetail.Rows[0].Cells["MaterialName"].Value = MatName;
                     gvReceiveDetail.Rows[0].Cells["MaterialUnit"].Value = MatUnit;
+                }
 
-                    DataGridViewButtonColumn columnDel = new DataGridViewButtonColumn();
-                    columnDel.Name = "Delete";
-                    columnDel.Text = "Del";
-                    columnDel.UseColumnTextForButtonValue = true;
-
-                    if (!gvReceiveDetail.Columns.Contains(columnDel))
+                else
+                {
+                    DataTable dt = DataTableReceiveDetail();
+                    foreach (DataGridViewRow row in gvReceiveDetail.Rows)
                     {
-                        gvReceiveDetail.Columns.Insert(0, columnDel);
-                        gvReceiveDetail.AutoSize = true;
-                        //gvReceiveDetail.AllowUserToAddRows = false;
-                        gvReceiveDetail.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                        gvReceiveDetail.CellClick += new DataGridViewCellEventHandler(gvReceiveDetail_CellClick);
+                        if (row.Cells["MaterialCode"].Value.ToString() == MatCode)
+                        {
+                            flag = true;
+                            break;
+                        }
+
+                        #region Using DataTable
+
+                        DataRow dr = dt.NewRow();
+
+                        dr["MaterialCode"] = row.Cells["MaterialCode"].Value.ToString();
+                        dr["MaterialName"] = row.Cells["MaterialName"].Value.ToString();
+                        dr["MaterialUnit"] = row.Cells["MaterialUnit"].Value.ToString();
+                        //dr[3] = row.Cells["OrderQuantity"].Value.ToString();
+                        //dr[4] = row.Cells["ChallanQuantity"].Value.ToString();
+                        //dr[5] = row.Cells["EarlierReceivedQuantity"].Value.ToString();
+                        //dr[6] = row.Cells["ReceivedQuantity"].Value.ToString();
+                        //dr[7] = row.Cells["DetailUnit"].Value.ToString();
+                        //dr[8] = row.Cells["DetailQuantity"].Value.ToString();
+                        //dr[9] = row.Cells["BatchNo"].Value.ToString();
+                        //dr[10] = row.Cells["ManufacturerLotNo"].Value.ToString();
+                        //dr[11] = row.Cells["LotQuantity"].Value.ToString();
+                        //dr[12] = row.Cells["NoOfPack"].Value.ToString();
+
+                        dt.Rows.Add(dr);
+                        #endregion
+
+                    }
+
+                    if (!flag)
+                    {
+                        DataRow drn = dt.NewRow();
+
+                        drn["MaterialCode"] = MatCode;
+                        drn["MaterialName"] = MatName;
+                        drn["MaterialUnit"] = MatUnit;
+                        //dr[3] = row.Cells["OrderQuantity"].Value.ToString();
+                        //dr[4] = row.Cells["ChallanQuantity"].Value.ToString();
+                        //dr[5] = row.Cells["EarlierReceivedQuantity"].Value.ToString();
+                        //dr[6] = row.Cells["ReceivedQuantity"].Value.ToString();
+                        //dr[7] = row.Cells["DetailUnit"].Value.ToString();
+                        //dr[8] = row.Cells["DetailQuantity"].Value.ToString();
+                        //dr[9] = row.Cells["BatchNo"].Value.ToString();
+                        //dr[10] = row.Cells["ManufacturerLotNo"].Value.ToString();
+                        //dr[11] = row.Cells["LotQuantity"].Value.ToString();
+                        //dr[12] = row.Cells["NoOfPack"].Value.ToString();
+
+                        dt.Rows.Add(drn);
+
+                        gvReceiveDetail.DataSource = dt;
+                        gvReceiveDetail.AllowUserToAddRows = false;
                     }
                 }
+
             }
+            else
+            {
+                InitializeDefaultReceiveDetail();
+                gvReceiveDetail.AllowUserToAddRows = true;
 
+                gvReceiveDetail.Rows[0].Cells["MaterialCode"].Value = MatCode;
+                gvReceiveDetail.Rows[0].Cells["MaterialName"].Value = MatName;
+                gvReceiveDetail.Rows[0].Cells["MaterialUnit"].Value = MatUnit;
 
+                DataGridViewButtonColumn columnDel = new DataGridViewButtonColumn();
+                columnDel.Name = "Delete";
+                columnDel.Text = "Del";
+                columnDel.UseColumnTextForButtonValue = true;
+
+                if (!gvReceiveDetail.Columns.Contains(columnDel))
+                {
+                    gvReceiveDetail.Columns.Insert(0, columnDel);
+                    gvReceiveDetail.AutoSize = true;
+                    //gvReceiveDetail.AllowUserToAddRows = false;
+                    gvReceiveDetail.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    gvReceiveDetail.CellClick += new DataGridViewCellEventHandler(gvReceiveDetail_CellClick);
+                }
+            }
+           
+        }
+
+        private void btnAddNewRow_Click(object sender, EventArgs e)
+        {
+            var MatForm = new MaterialSearchForm();
+
+            MatForm.btnAddMaterial += (senderMatForm, eMatForm) => AddMaterial(eMatForm.Entity);
+
+            MatForm.ShowDialog();
+
+            AddNewMaterial();
 
         }
 

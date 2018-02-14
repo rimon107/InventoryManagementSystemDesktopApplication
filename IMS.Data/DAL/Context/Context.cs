@@ -1,12 +1,12 @@
-﻿using IMS.Data.DLL.IContext;
+﻿using IMS.Data.DAL.IContext;
 using IMS.Data.Model;
-using IMS.Service.DLL.IContext;
+using IMS.Service.DAL.IContext;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 
-namespace IMS.Data.DLL.Context
+namespace IMS.Data.DAL.Context
 {
     public class Context<T> : IContext<T>  where T: class
     {
@@ -38,13 +38,13 @@ namespace IMS.Data.DLL.Context
             return entity;
         }
         
-        public IList<T> GetAllEntity()
+        public IList<T> GetAll()
         {
             return entities.ToList();
         }
 
 
-        public T GetEntityById(int EntityId)
+        public T GetById(int EntityId)
         {
             return entities.Find(EntityId);
         }

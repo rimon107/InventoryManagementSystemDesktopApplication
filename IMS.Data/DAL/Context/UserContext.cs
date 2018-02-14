@@ -1,4 +1,4 @@
-﻿using IMS.Data.DLL.IContext;
+﻿using IMS.Data.DAL.IContext;
 using IMS.Data.Model;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IMS.Data.DLL.Context
+namespace IMS.Data.DAL.Context
 {
     public class UserContext : IDisposable, IUserContext
     {

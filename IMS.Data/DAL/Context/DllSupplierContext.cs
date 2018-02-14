@@ -1,12 +1,12 @@
 ﻿using IMS.Data.Model;
-using IMS.Service.DLL.IContext;
+using IMS.Service.DAL.IContext;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 
 
-namespace IMS.Data.DLL.Context
+namespace IMS.Data.DAL.Context
 {
     public class DllSupplierContext : IDisposable, ISupplierContext
     {

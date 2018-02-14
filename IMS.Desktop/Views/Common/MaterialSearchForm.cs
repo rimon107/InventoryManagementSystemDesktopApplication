@@ -1,16 +1,9 @@
 ﻿using Common.Library;
-using IMS.Data.DLL.Context;
-using IMS.Data.DLL.IContext;
+using IMS.Data.DAL.Context;
+using IMS.Data.DAL.IContext;
 using IMS.Data.Model;
-using IMS.Service.BAL;
+using IMS.Service.BLL;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Unity;
 
@@ -19,6 +12,7 @@ namespace IMS.Desktop.Views.Common
     public partial class MaterialSearchForm : Form
     {
         private readonly GenericContext<Material> Context;
+        public event EventHandler<MessageEventArgs<Material>> btnAddMaterial;
 
         public MaterialSearchForm()
         {
@@ -67,6 +61,12 @@ namespace IMS.Desktop.Views.Common
 
         private void btnOk_Click(object sender, EventArgs e)
         {
+            InsertMaterial();
+            CloseForm();
+        }
+
+        private void AddMaterialToParent()
+        {
             var row = GetSelectedRow();
 
             if (row == null)
@@ -77,7 +77,7 @@ namespace IMS.Desktop.Views.Common
             {
                 SetMaterial(row);
 
-                CloseForm();
+                
             }
         }
 
@@ -88,22 +88,26 @@ namespace IMS.Desktop.Views.Common
 
         private void gvMaterial_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            var row = GetSelectedRow();
+            //var row = GetSelectedRow();
 
-            if (row == null)
-            {
-                MessageBox.Show("Please select a row.");
-            }
-            else
-            {
-                SetMaterial(row);
+            //if (row == null)
+            //{
+            //    MessageBox.Show("Please select a row.");
+            //}
+            //else
+            //{
+            //    SetMaterial(row);
 
-                CloseForm();
-            }
+            //    CloseForm();
+            //}
+
+            InsertMaterial();
+
         }
 
         private void CloseForm()
         {
+            Entity<Material>.check = false;
             this.Close();
         }
 
@@ -116,6 +120,7 @@ namespace IMS.Desktop.Views.Common
             _Material.Unit = row.Cells["Unit"].Value.ToString();
             
             Entity<Material>.entity = _Material;
+            Entity<Material>.check = true;
         }
 
         private DataGridViewRow GetSelectedRow()
@@ -161,6 +166,29 @@ namespace IMS.Desktop.Views.Common
             return row;
         }
 
-       
+        private void InsertMaterial()
+        {
+            var _Material = new Material();
+
+            var row = GetSelectedRow();
+
+            _Material.MaterialCode = row.Cells["MaterialCode"].Value.ToString();
+            _Material.MaterialName = row.Cells["MaterialName"].Value.ToString();
+            _Material.Unit = row.Cells["Unit"].Value.ToString();
+
+            EventHandler<MessageEventArgs<Material>> handler = btnAddMaterial;
+
+            if (handler != null)
+            {
+                handler(this, new MessageEventArgs<Material>(_Material));
+            }
+        }
+
+        private void btnInsert_Click(object sender, EventArgs e)
+        {
+            InsertMaterial();
+        }
+
+        
     }
 }

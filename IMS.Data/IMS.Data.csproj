@@ -49,12 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DLL\Context\Context.cs" />
-    <Compile Include="DLL\IContext\IUserContext.cs" />
-    <Compile Include="DLL\Context\UserContext.cs" />
-    <Compile Include="DLL\IContext\IContext.cs" />
-    <Compile Include="DLL\IContext\ISupplierContext.cs" />
-    <Compile Include="DLL\Context\DllSupplierContext.cs" />
+    <Compile Include="DAL\Context\Context.cs" />
+    <Compile Include="DAL\IContext\IUserContext.cs" />
+    <Compile Include="DAL\Context\UserContext.cs" />
+    <Compile Include="DAL\IContext\IContext.cs" />
+    <Compile Include="DAL\IContext\ISupplierContext.cs" />
+    <Compile Include="DAL\Context\DllSupplierContext.cs" />
     <Compile Include="Model\Entity.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

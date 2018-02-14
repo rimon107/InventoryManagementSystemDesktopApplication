@@ -1,13 +1,9 @@
 ﻿using Common.Library;
-using IMS.Data.DLL.IContext;
-using IMS.Data.Model;
-using System;
+using IMS.Data.DAL.IContext;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-namespace IMS.Service.BAL
+
+namespace IMS.Service.BLL
 {
     public class GenericContext<T> where T : class
     {
@@ -112,7 +108,7 @@ namespace IMS.Service.BAL
 
         public bool Delete(int EntityId)
         {
-            T entity = context.GetEntityById(EntityId);
+            T entity = context.GetById(EntityId);
 
             if (entity != null)
             {
@@ -129,14 +125,14 @@ namespace IMS.Service.BAL
 
         }
 
-        public ICollection<T> GetAllEntity()
+        public ICollection<T> GetAll()
         {
-            return context.GetAllEntity();
+            return context.GetAll();
         }
 
-        public T GetEntityById(int EntityId)
+        public T GetById(int EntityId)
         {
-            return context.GetEntityById(EntityId);
+            return context.GetById(EntityId);
         }
 
         public void SetEntityList()
@@ -144,7 +140,7 @@ namespace IMS.Service.BAL
             EntityList.Clear();
             Entity = null;
 
-            var Elist = GetAllEntity();
+            var Elist = GetAll();
             foreach (var entity in Elist)
                 EntityList.Add(entity);
         }

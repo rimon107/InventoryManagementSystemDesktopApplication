@@ -1,8 +1,8 @@
 ﻿using Common.Library;
-using IMS.Data.DLL.Context;
-using IMS.Data.DLL.IContext;
+using IMS.Data.DAL.Context;
+using IMS.Data.DAL.IContext;
 using IMS.Data.Model;
-using IMS.Service.BAL;
+using IMS.Service.BLL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,7 +19,7 @@ namespace IMS.Desktop.Views.Security
 {
     public partial class Login : Form
     {
-        private readonly IMS.Service.BAL.UserContext UserContext;
+        private readonly IMS.Service.BLL.UserContext UserContext;
 
         public Login()
         {
@@ -27,9 +27,9 @@ namespace IMS.Desktop.Views.Security
             
             var container = new UnityContainer();
 
-            container.RegisterType<IUserContext, IMS.Data.DLL.Context.UserContext>();
+            container.RegisterType<IUserContext, IMS.Data.DAL.Context.UserContext>();
             
-            UserContext = container.Resolve<IMS.Service.BAL.UserContext>();
+            UserContext = container.Resolve<IMS.Service.BLL.UserContext>();
             
         }
 
