@@ -35,5 +35,6 @@ namespace IMS.Data.Model
         public virtual DbSet<TransactionSource> TransactionSources { get; set; }
         public virtual DbSet<UserManager> UserManagers { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
+        public virtual DbSet<Manufacturer> Manufacturers { get; set; }
     }
 }

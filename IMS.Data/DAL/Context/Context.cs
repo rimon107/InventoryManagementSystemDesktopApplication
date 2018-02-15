@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace IMS.Data.DAL.Context
 {
-    public class Context<T> : IContext<T>  where T: class
+    public class Context<T> : IContext<T>, IDisposable  where T: class
     {
         private bool disposed;
         private readonly InventoryEntities context;

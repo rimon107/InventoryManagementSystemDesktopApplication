@@ -39,12 +39,16 @@ namespace IMS.Data.DAL.Context
         private void Dispose(bool disposing)
         {
             if (disposed || !disposing)
+            {
                 return;
+            }
 
             if (context != null)
+            {
                 //context.Dispose();
 
                 disposed = true;
+            }
         }
 
         #endregion

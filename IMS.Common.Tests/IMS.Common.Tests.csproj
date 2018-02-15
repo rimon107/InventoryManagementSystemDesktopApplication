@@ -63,7 +63,6 @@
   <ItemGroup>
     <Compile Include="UnitTests\ModelStateTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnitTests\IsPrimeShould.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

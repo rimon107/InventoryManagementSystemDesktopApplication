@@ -67,7 +67,7 @@ namespace IMS.Desktop.Views.Common
 
         private void AddMaterialToParent()
         {
-            var row = GetSelectedRow();
+            var row = new DataGridViewCommon().GetSelectedRow(this.gvMaterial);
 
             if (row == null)
             {
@@ -122,55 +122,12 @@ namespace IMS.Desktop.Views.Common
             Entity<Material>.entity = _Material;
             Entity<Material>.check = true;
         }
-
-        private DataGridViewRow GetSelectedRow()
-        {
-            DataGridViewRow row;
-            try
-            {
-                Int32 selectedRowCount = gvMaterial.Rows.GetRowCount(DataGridViewElementStates.Selected);
-                if (selectedRowCount == 1)
-                {
-                    row = gvMaterial.SelectedRows[0];
-                }
-                else
-                {
-                    if (selectedRowCount > 1)
-                    {
-                        row = null;
-                    }
-                    else
-                    {
-                        try
-                        {
-                            var RowIndex = gvMaterial.SelectedCells[0].RowIndex;
-                            row = gvMaterial.Rows[RowIndex];
-                        }
-                        catch
-                        {
-                            row = null;
-                        }
-                    }
-                }
-
-
-            }
-            catch
-            {
-
-
-                row = null;
-
-            }
-
-            return row;
-        }
-
+        
         private void InsertMaterial()
         {
             var _Material = new Material();
 
-            var row = GetSelectedRow();
+            var row = new DataGridViewCommon().GetSelectedRow(this.gvMaterial);
 
             _Material.MaterialCode = row.Cells["MaterialCode"].Value.ToString();
             _Material.MaterialName = row.Cells["MaterialName"].Value.ToString();

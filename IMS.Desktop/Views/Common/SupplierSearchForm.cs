@@ -55,7 +55,8 @@ namespace IMS.Desktop.Views.Common
 
         private void gvSupplier_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            var row = GetSelectedRow();
+            //var row = GetSelectedRow();
+            var row = new DataGridViewCommon().GetSelectedRow(this.gvSupplier);
 
             if (row == null)
             {
@@ -76,7 +77,7 @@ namespace IMS.Desktop.Views.Common
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            var row = GetSelectedRow();
+            var row = new DataGridViewCommon().GetSelectedRow(this.gvSupplier);
 
             if(row == null)
             {
@@ -106,48 +107,6 @@ namespace IMS.Desktop.Views.Common
 
             Entity<Supplier>.entity = _Supplier;
         }
-
-        private DataGridViewRow GetSelectedRow()
-        {
-            DataGridViewRow row;
-            try
-            {
-                Int32 selectedRowCount = gvSupplier.Rows.GetRowCount(DataGridViewElementStates.Selected);
-                if(selectedRowCount == 1)
-                {
-                    row = gvSupplier.SelectedRows[0];
-                }
-                else 
-                {
-                    if (selectedRowCount > 1)
-                    {
-                        row = null;
-                    }
-                    else
-                    {
-                        try
-                        {
-                            var RowIndex = gvSupplier.SelectedCells[0].RowIndex;
-                            row = gvSupplier.Rows[RowIndex];
-                        }
-                        catch
-                        {
-                            row = null;
-                        }
-                    }
-                }
-                
-                
-            }
-            catch
-            {
-                
-
-                row = null;
-
-            }
-
-            return row;
-        }
+        
     }
 }

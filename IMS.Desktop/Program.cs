@@ -45,6 +45,10 @@ namespace IMS.Desktop
             container.RegisterType<GenericContext<ReceiveDetail>>(
                 new InjectionConstructor(container.Resolve<IContext<ReceiveDetail>>("ReceiveDetailInfo")));
 
+          
+            container.RegisterType<IContext<Manufacturer>, Context<Manufacturer>>();
+            container.Resolve<GenericContext<Manufacturer>>();
+
             return container;
         }
     }

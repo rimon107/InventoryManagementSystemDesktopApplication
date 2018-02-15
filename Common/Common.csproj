@@ -33,6 +33,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,10 +43,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Library\CollectionHelper.cs" />
+    <Compile Include="Library\DataGridViewCommon.cs" />
     <Compile Include="Library\Entity.cs" />
     <Compile Include="Library\MessageEventArgs.cs" />
     <Compile Include="Library\ModelState.cs" />
-    <Compile Include="Library\PrimeService.cs" />
     <Compile Include="Library\RandomNumberGenerator.cs" />
     <Compile Include="Library\Session.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

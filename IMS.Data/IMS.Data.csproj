@@ -55,6 +55,7 @@
     <Compile Include="DAL\IContext\IContext.cs" />
     <Compile Include="DAL\IContext\ISupplierContext.cs" />
     <Compile Include="DAL\Context\DllSupplierContext.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Model\Entity.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -69,6 +70,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Entity.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Manufacturer.cs">
+      <DependentUpon>Entity.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Material.cs">
       <DependentUpon>Entity.tt</DependentUpon>
