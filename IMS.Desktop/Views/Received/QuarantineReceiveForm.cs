@@ -17,8 +17,7 @@ namespace IMS.Desktop.Views.Received
         private GenericContext<PlantInfo> _PlantContext;
         private GenericContext<ReceiveDetail> _ReceiveDetailContext;
         private GenericContext<Receive> _ReceiveContext;
-
-
+        
         #endregion
 
         public QuarantineReceiveForm()
@@ -84,7 +83,7 @@ namespace IMS.Desktop.Views.Received
             //gvReceiveDetail.CellClick += new DataGridViewCellEventHandler(gvReceiveDetail_CellClick);
 
             var data = _ReceiveDetailContext.EntityList;
-           
+
             if (data.Count == 0)
             {
                 InitializeDefaultReceiveDetail();
@@ -102,7 +101,7 @@ namespace IMS.Desktop.Views.Received
                 gvReceiveDetail.Columns.Insert(11, columnManufacturer);
 
             }
-            
+
         }
 
         private DataTable DataTableReceiveDetail()
@@ -170,38 +169,42 @@ namespace IMS.Desktop.Views.Received
         // reports that the button is enabled.
         void gvReceiveDetail_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (gvReceiveDetail.Columns[e.ColumnIndex].Name == "Delete")
+            if (e.ColumnIndex != -1)
             {
-                gvReceiveDetail.AllowUserToAddRows = false;
-                if (gvReceiveDetail.Rows.Count > 0)
+
+                if (gvReceiveDetail.Columns[e.ColumnIndex].Name == "Delete")
                 {
-                    gvReceiveDetail.Rows.RemoveAt(e.RowIndex);
-                }
-                
-            }
+                    gvReceiveDetail.AllowUserToAddRows = false;
+                    if (gvReceiveDetail.Rows.Count > 0)
+                    {
+                        gvReceiveDetail.Rows.RemoveAt(e.RowIndex);
+                    }
 
-            if (gvReceiveDetail.Columns[e.ColumnIndex].Name == "Manufacturer")
-            {
-                //gvReceiveDetail.AllowUserToAddRows = false;
-               
-                new ManufacturerSearchForm().ShowDialog();
-
-                if (Entity<Manufacturer>.entity != null)
-                {
-
-                    string manName = Entity<Manufacturer>.entity.Name;
-                    int manId = Entity<Manufacturer>.entity.Id;
-
-                    gvReceiveDetail.Rows[e.RowIndex].Cells["Manufacturer"].Value = manName;
-                    gvReceiveDetail.Rows[e.RowIndex].Cells["ManufacturerId"].Value = manId;
-
-
-                    Entity<Manufacturer>.entity = null;
                 }
 
+                if (gvReceiveDetail.Columns[e.ColumnIndex].Name == "Manufacturer")
+                {
+                    //gvReceiveDetail.AllowUserToAddRows = false;
 
-                
+                    new ManufacturerSearchForm().ShowDialog();
 
+                    if (Entity<Manufacturer>.entity != null)
+                    {
+
+                        string manName = Entity<Manufacturer>.entity.Name;
+                        int manId = Entity<Manufacturer>.entity.Id;
+
+                        gvReceiveDetail.Rows[e.RowIndex].Cells["Manufacturer"].Value = manName;
+                        gvReceiveDetail.Rows[e.RowIndex].Cells["ManufacturerId"].Value = manId;
+
+
+                        Entity<Manufacturer>.entity = null;
+                    }
+
+
+
+
+                }
             }
 
         }

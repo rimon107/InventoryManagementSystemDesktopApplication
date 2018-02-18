@@ -288,6 +288,7 @@
             // gvReceiveDetail
             // 
             this.gvReceiveDetail.AllowUserToAddRows = false;
+            this.gvReceiveDetail.AllowUserToDeleteRows = false;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -315,7 +316,7 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.gvReceiveDetail.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.gvReceiveDetail.Size = new System.Drawing.Size(1093, 295);
+            this.gvReceiveDetail.Size = new System.Drawing.Size(1543, 295);
             this.gvReceiveDetail.TabIndex = 54;
             this.gvReceiveDetail.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvReceiveDetail_CellClick);
             // 
@@ -389,7 +390,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1142, 595);
+            this.ClientSize = new System.Drawing.Size(1593, 595);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnAddNewRow);
             this.Controls.Add(this.txtReceiveText);
